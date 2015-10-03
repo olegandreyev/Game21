@@ -1,0 +1,373 @@
+@import "bootstrap.min.css";
+.player-card.card {
+  display: none;
+}
+.club_0 {
+  background: url('../resources/default_cards/clubs_2.png') !important;
+  background-size: cover !important;
+}
+.club_1 {
+  background: url('../resources/default_cards/clubs_3.png') !important;
+  background-size: cover !important;
+}
+.club_2 {
+  background: url('../resources/default_cards/clubs_4.png') !important;
+  background-size: cover !important;
+}
+.club_3 {
+  background: url('../resources/default_cards/clubs_5.png') !important;
+  background-size: cover !important;
+}
+.club_4 {
+  background: url('../resources/default_cards/clubs_6.png') !important;
+  background-size: cover !important;
+}
+.club_5 {
+  background: url('../resources/default_cards/clubs_7.png') !important;
+  background-size: cover !important;
+}
+.club_6 {
+  background: url('../resources/default_cards/clubs_8.png') !important;
+  background-size: cover !important;
+}
+.club_7 {
+  background: url('../resources/default_cards/clubs_9.png') !important;
+  background-size: cover !important;
+}
+.club_8 {
+  background: url('../resources/default_cards/clubs_10.png') !important;
+  background-size: cover !important;
+}
+.club_9 {
+  background: url('../resources/default_cards/clubs_J.png') !important;
+  background-size: cover !important;
+}
+.club_10 {
+  background: url('../resources/default_cards/clubs_Q.png') !important;
+  background-size: cover !important;
+}
+.club_11 {
+  background: url('../resources/default_cards/clubs_K.png') !important;
+  background-size: cover !important;
+}
+.club_12 {
+  background: url('../resources/default_cards/clubs_A.png') !important;
+  background-size: cover !important;
+}
+.diamond_0 {
+  background: url('../resources/default_cards/diamonds_2.png') !important;
+  background-size: cover !important;
+}
+.diamond_1 {
+  background: url('../resources/default_cards/diamonds_3.png') !important;
+  background-size: cover !important;
+}
+.diamond_2 {
+  background: url('../resources/default_cards/diamonds_4.png') !important;
+  background-size: cover !important;
+}
+.diamond_3 {
+  background: url('../resources/default_cards/diamonds_5.png') !important;
+  background-size: cover !important;
+}
+.diamond_4 {
+  background: url('../resources/default_cards/diamonds_6.png') !important;
+  background-size: cover !important;
+}
+.diamond_5 {
+  background: url('../resources/default_cards/diamonds_7.png') !important;
+  background-size: cover !important;
+}
+.diamond_6 {
+  background: url('../resources/default_cards/diamonds_8.png') !important;
+  background-size: cover !important;
+}
+.diamond_7 {
+  background: url('../resources/default_cards/diamonds_9.png') !important;
+  background-size: cover !important;
+}
+.diamond_8 {
+  background: url('../resources/default_cards/diamonds_10.png') !important;
+  background-size: cover !important;
+}
+.diamond_9 {
+  background: url('../resources/default_cards/diamonds_J.png') !important;
+  background-size: cover !important;
+}
+.diamond_10 {
+  background: url('../resources/default_cards/diamonds_Q.png') !important;
+  background-size: cover !important;
+}
+.diamond_11 {
+  background: url('../resources/default_cards/diamonds_K.png') !important;
+  background-size: cover !important;
+}
+.diamond_12 {
+  background: url('../resources/default_cards/diamonds_A.png') !important;
+  background-size: cover !important;
+}
+.heart_0 {
+  background: url('../resources/default_cards/hearts_2.png') !important;
+  background-size: cover !important;
+}
+.heart_1 {
+  background: url('../resources/default_cards/hearts_3.png') !important;
+  background-size: cover !important;
+}
+.heart_2 {
+  background: url('../resources/default_cards/hearts_4.png') !important;
+  background-size: cover !important;
+}
+.heart_3 {
+  background: url('../resources/default_cards/hearts_5.png') !important;
+  background-size: cover !important;
+}
+.heart_4 {
+  background: url('../resources/default_cards/hearts_6.png') !important;
+  background-size: cover !important;
+}
+.heart_5 {
+  background: url('../resources/default_cards/hearts_7.png') !important;
+  background-size: cover !important;
+}
+.heart_6 {
+  background: url('../resources/default_cards/hearts_8.png') !important;
+  background-size: cover !important;
+}
+.heart_7 {
+  background: url('../resources/default_cards/hearts_9.png') !important;
+  background-size: cover !important;
+}
+.heart_8 {
+  background: url('../resources/default_cards/hearts_10.png') !important;
+  background-size: cover !important;
+}
+.heart_9 {
+  background: url('../resources/default_cards/hearts_J.png') !important;
+  background-size: cover !important;
+}
+.heart_10 {
+  background: url('../resources/default_cards/hearts_Q.png') !important;
+  background-size: cover !important;
+}
+.heart_11 {
+  background: url('../resources/default_cards/hearts_K.png') !important;
+  background-size: cover !important;
+}
+.heart_12 {
+  background: url('../resources/default_cards/hearts_A.png') !important;
+  background-size: cover !important;
+}
+.spade_0 {
+  background: url('../resources/default_cards/spades_2.png') !important;
+  background-size: cover !important;
+}
+.spade_1 {
+  background: url('../resources/default_cards/spades_3.png') !important;
+  background-size: cover !important;
+}
+.spade_2 {
+  background: url('../resources/default_cards/spades_4.png') !important;
+  background-size: cover !important;
+}
+.spade_3 {
+  background: url('../resources/default_cards/spades_5.png') !important;
+  background-size: cover !important;
+}
+.spade_4 {
+  background: url('../resources/default_cards/spades_6.png') !important;
+  background-size: cover !important;
+}
+.spade_5 {
+  background: url('../resources/default_cards/spades_7.png') !important;
+  background-size: cover !important;
+}
+.spade_6 {
+  background: url('../resources/default_cards/spades_8.png') !important;
+  background-size: cover !important;
+}
+.spade_7 {
+  background: url('../resources/default_cards/spades_9.png') !important;
+  background-size: cover !important;
+}
+.spade_8 {
+  background: url('../resources/default_cards/spades_10.png') !important;
+  background-size: cover !important;
+}
+.spade_9 {
+  background: url('../resources/default_cards/spades_J.png') !important;
+  background-size: cover !important;
+}
+.spade_10 {
+  background: url('../resources/default_cards/spades_Q.png') !important;
+  background-size: cover !important;
+}
+.spade_11 {
+  background: url('../resources/default_cards/spades_K.png') !important;
+  background-size: cover !important;
+}
+.spade_12 {
+  background: url('../resources/default_cards/spades_A.png') !important;
+  background-size: cover !important;
+}
+body {
+  background: whitesmoke;
+}
+.header {
+  background: url(../../resources/header.jpg) no-repeat center center;
+  background-size: cover;
+  color: white;
+  margin-bottom: 0;
+}
+.status {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.status.online {
+  background: greenyellow;
+}
+.status.offline {
+  background: yellow;
+}
+.input {
+  margin-top: 5px;
+}
+.messages {
+  height: 200px;
+  overflow-y: scroll;
+  word-break: break-all;
+  border-radius: 10px;
+  background: #ffffff;
+}
+.message {
+  width: 70%;
+  margin: 5px 10px;
+  clear: both;
+}
+.message.your-message {
+  float: right;
+}
+.navbar-right {
+  margin-right: 25px;
+}
+.room-title {
+  color: white;
+}
+.leader {
+  background: url(../resources/Crown_Icon.png) no-repeat center center;
+  float: right;
+  width: 40px;
+  height: 20px;
+  background-size: cover;
+  margin-right: 10px;
+}
+.users-lobby {
+  height: 300px;
+}
+.actions-lobby .btn {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 4px;
+}
+.table-game {
+  background: url('../resources/table.png') no-repeat center center;
+  overflow-x: hidden;
+  height: 584px;
+  width: 1366px;
+  margin: 0 auto;
+  background-size: contain;
+  position: relative;
+}
+.table-game .cards {
+  background: url(../resources/shurt.png) no-repeat 0 0, url(../resources/shurt.png) no-repeat 0 4px, url(../resources/shurt.png) no-repeat 0 8px, url(../resources/shurt.png) no-repeat 0 12px, url(../resources/shurt.png) no-repeat 0 16px, url(../resources/shurt.png) no-repeat 0 20px;
+  height: 124px;
+  width: 62px;
+  position: absolute;
+  left: 656px;
+  top: 60px;
+}
+.table-game .player {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+.table-game.size2 .spot0 {
+  position: absolute;
+  left: 67%;
+  top: 70%;
+}
+.table-game.size2 .spot1 {
+  position: absolute;
+  left: 29%;
+  top: 70%;
+}
+.table-game.size3 .spot0 {
+  position: absolute;
+  left: 76%;
+  top: 60%;
+}
+.table-game.size3 .spot1 {
+  position: absolute;
+  left: 47%;
+  top: 84%;
+}
+.table-game.size3 .spot2 {
+  position: absolute;
+  left: 19%;
+  top: 60%;
+}
+.table-game.size4 .spot0 {
+  position: absolute;
+  left: 84%;
+  top: 38%;
+}
+.table-game.size4 .spot1 {
+  position: absolute;
+  left: 69%;
+  top: 74%;
+}
+.table-game.size4 .spot2 {
+  position: absolute;
+  left: 25%;
+  top: 74%;
+}
+.table-game.size4 .spot3 {
+  position: absolute;
+  left: 11%;
+  top: 38%;
+}
+.actions {
+  width: 250px;
+  margin: 5px auto;
+}
+.actions .btn {
+  width: 100px;
+  margin-right: 10px;
+}
+.card {
+  background: url(../resources/shurt.png) no-repeat 0 0;
+  height: 92px;
+  width: 62px;
+  display: inline-block;
+  vertical-align: top;
+}
+.card:not(:first-child) {
+  margin-left: -43px;
+}
+.fly {
+  background: url(../resources/shurt.png) no-repeat 0 0;
+  height: 92px;
+  width: 62px;
+  position: absolute;
+  left: 656px;
+  top: 60px;
+  transition: all 1s linear;
+}
+.cardTO0 {
+  left: 920px;
+  top: 436px;
+}

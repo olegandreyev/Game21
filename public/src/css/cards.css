@@ -1,0 +1,211 @@
+.player-card.card {
+  display: none;
+}
+.club_0 {
+  background: url('../resources/default_cards/clubs_2.png') !important;
+  background-size: cover !important;
+}
+.club_1 {
+  background: url('../resources/default_cards/clubs_3.png') !important;
+  background-size: cover !important;
+}
+.club_2 {
+  background: url('../resources/default_cards/clubs_4.png') !important;
+  background-size: cover !important;
+}
+.club_3 {
+  background: url('../resources/default_cards/clubs_5.png') !important;
+  background-size: cover !important;
+}
+.club_4 {
+  background: url('../resources/default_cards/clubs_6.png') !important;
+  background-size: cover !important;
+}
+.club_5 {
+  background: url('../resources/default_cards/clubs_7.png') !important;
+  background-size: cover !important;
+}
+.club_6 {
+  background: url('../resources/default_cards/clubs_8.png') !important;
+  background-size: cover !important;
+}
+.club_7 {
+  background: url('../resources/default_cards/clubs_9.png') !important;
+  background-size: cover !important;
+}
+.club_8 {
+  background: url('../resources/default_cards/clubs_10.png') !important;
+  background-size: cover !important;
+}
+.club_9 {
+  background: url('../resources/default_cards/clubs_J.png') !important;
+  background-size: cover !important;
+}
+.club_10 {
+  background: url('../resources/default_cards/clubs_Q.png') !important;
+  background-size: cover !important;
+}
+.club_11 {
+  background: url('../resources/default_cards/clubs_K.png') !important;
+  background-size: cover !important;
+}
+.club_12 {
+  background: url('../resources/default_cards/clubs_A.png') !important;
+  background-size: cover !important;
+}
+.diamond_0 {
+  background: url('../resources/default_cards/diamonds_2.png') !important;
+  background-size: cover !important;
+}
+.diamond_1 {
+  background: url('../resources/default_cards/diamonds_3.png') !important;
+  background-size: cover !important;
+}
+.diamond_2 {
+  background: url('../resources/default_cards/diamonds_4.png') !important;
+  background-size: cover !important;
+}
+.diamond_3 {
+  background: url('../resources/default_cards/diamonds_5.png') !important;
+  background-size: cover !important;
+}
+.diamond_4 {
+  background: url('../resources/default_cards/diamonds_6.png') !important;
+  background-size: cover !important;
+}
+.diamond_5 {
+  background: url('../resources/default_cards/diamonds_7.png') !important;
+  background-size: cover !important;
+}
+.diamond_6 {
+  background: url('../resources/default_cards/diamonds_8.png') !important;
+  background-size: cover !important;
+}
+.diamond_7 {
+  background: url('../resources/default_cards/diamonds_9.png') !important;
+  background-size: cover !important;
+}
+.diamond_8 {
+  background: url('../resources/default_cards/diamonds_10.png') !important;
+  background-size: cover !important;
+}
+.diamond_9 {
+  background: url('../resources/default_cards/diamonds_J.png') !important;
+  background-size: cover !important;
+}
+.diamond_10 {
+  background: url('../resources/default_cards/diamonds_Q.png') !important;
+  background-size: cover !important;
+}
+.diamond_11 {
+  background: url('../resources/default_cards/diamonds_K.png') !important;
+  background-size: cover !important;
+}
+.diamond_12 {
+  background: url('../resources/default_cards/diamonds_A.png') !important;
+  background-size: cover !important;
+}
+.heart_0 {
+  background: url('../resources/default_cards/hearts_2.png') !important;
+  background-size: cover !important;
+}
+.heart_1 {
+  background: url('../resources/default_cards/hearts_3.png') !important;
+  background-size: cover !important;
+}
+.heart_2 {
+  background: url('../resources/default_cards/hearts_4.png') !important;
+  background-size: cover !important;
+}
+.heart_3 {
+  background: url('../resources/default_cards/hearts_5.png') !important;
+  background-size: cover !important;
+}
+.heart_4 {
+  background: url('../resources/default_cards/hearts_6.png') !important;
+  background-size: cover !important;
+}
+.heart_5 {
+  background: url('../resources/default_cards/hearts_7.png') !important;
+  background-size: cover !important;
+}
+.heart_6 {
+  background: url('../resources/default_cards/hearts_8.png') !important;
+  background-size: cover !important;
+}
+.heart_7 {
+  background: url('../resources/default_cards/hearts_9.png') !important;
+  background-size: cover !important;
+}
+.heart_8 {
+  background: url('../resources/default_cards/hearts_10.png') !important;
+  background-size: cover !important;
+}
+.heart_9 {
+  background: url('../resources/default_cards/hearts_J.png') !important;
+  background-size: cover !important;
+}
+.heart_10 {
+  background: url('../resources/default_cards/hearts_Q.png') !important;
+  background-size: cover !important;
+}
+.heart_11 {
+  background: url('../resources/default_cards/hearts_K.png') !important;
+  background-size: cover !important;
+}
+.heart_12 {
+  background: url('../resources/default_cards/hearts_A.png') !important;
+  background-size: cover !important;
+}
+.spade_0 {
+  background: url('../resources/default_cards/spades_2.png') !important;
+  background-size: cover !important;
+}
+.spade_1 {
+  background: url('../resources/default_cards/spades_3.png') !important;
+  background-size: cover !important;
+}
+.spade_2 {
+  background: url('../resources/default_cards/spades_4.png') !important;
+  background-size: cover !important;
+}
+.spade_3 {
+  background: url('../resources/default_cards/spades_5.png') !important;
+  background-size: cover !important;
+}
+.spade_4 {
+  background: url('../resources/default_cards/spades_6.png') !important;
+  background-size: cover !important;
+}
+.spade_5 {
+  background: url('../resources/default_cards/spades_7.png') !important;
+  background-size: cover !important;
+}
+.spade_6 {
+  background: url('../resources/default_cards/spades_8.png') !important;
+  background-size: cover !important;
+}
+.spade_7 {
+  background: url('../resources/default_cards/spades_9.png') !important;
+  background-size: cover !important;
+}
+.spade_8 {
+  background: url('../resources/default_cards/spades_10.png') !important;
+  background-size: cover !important;
+}
+.spade_9 {
+  background: url('../resources/default_cards/spades_J.png') !important;
+  background-size: cover !important;
+}
+.spade_10 {
+  background: url('../resources/default_cards/spades_Q.png') !important;
+  background-size: cover !important;
+}
+.spade_11 {
+  background: url('../resources/default_cards/spades_K.png') !important;
+  background-size: cover !important;
+}
+.spade_12 {
+  background: url('../resources/default_cards/spades_A.png') !important;
+  background-size: cover !important;
+}

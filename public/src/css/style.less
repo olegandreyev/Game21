@@ -1,0 +1,173 @@
+@import "bootstrap.min.css";
+@import "mixins";
+@import 'cards';
+body {
+  background: whitesmoke;
+}
+
+.header {
+  background: url(../../resources/header.jpg) no-repeat center center;
+  background-size: cover;
+  color: white;
+  margin-bottom: 0;
+}
+
+.status {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+  &.online {
+    background: greenyellow;
+  }
+  &.offline {
+    background: yellow;
+  }
+}
+
+.input {
+  margin-top: 5px;
+}
+
+.messages {
+  height: 200px;
+  overflow-y: scroll;
+  word-break: break-all;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.message {
+  width: 70%;
+  margin: 5px 10px;
+  &.your-message {
+    float: right;
+  }
+  clear: both;
+}
+
+.navbar-right {
+  margin-right: 25px;
+}
+
+.room-title {
+  color: white
+}
+
+.leader {
+  background: url(../resources/Crown_Icon.png) no-repeat center center;
+  float: right;
+  width: 40px;
+  height: 20px;
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.users-lobby {
+  height: 300px;
+}
+
+.actions-lobby {
+  .btn {
+    .dip();
+    margin-right: 4px;
+  }
+}
+
+.table-game {
+  background: url('../resources/table.png') no-repeat center center;
+  overflow-x: hidden;
+  height: 584px;
+  width: 1366px;
+  margin: 0 auto;
+  background-size: contain;
+  position: relative;
+  .cards {
+    background: url(../resources/shurt.png) no-repeat 0 0,
+    url(../resources/shurt.png) no-repeat 0 4px,
+    url(../resources/shurt.png) no-repeat 0 8px,
+    url(../resources/shurt.png) no-repeat 0 12px,
+    url(../resources/shurt.png) no-repeat 0 16px,
+    url(../resources/shurt.png) no-repeat 0 20px;
+    height: 124px;
+    width: 62px;
+    .abs(656px, 60px);
+
+  }
+  .player {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+  }
+  &.size2 {
+    .spot0 {
+      .abs(67%, 70%);
+    }
+    .spot1 {
+      .abs(29%, 70%);
+    }
+  }
+  &.size3 {
+    .spot0 {
+      .abs(76%, 60%);
+    }
+    .spot1 {
+      .abs(47%, 84%);
+    }
+    .spot2 {
+      .abs(19%, 60%);
+    }
+  }
+  &.size4 {
+    .spot0 {
+      .abs(84%, 38%);
+    }
+    .spot1 {
+      .abs(69%, 74%);
+    }
+    .spot2 {
+      .abs(25%, 74%);
+    }
+    .spot3 {
+      .abs(11%, 38%)
+    }
+  }
+
+}
+
+.actions {
+  width: 250px;
+  margin: 5px auto;
+  .btn {
+    width: 100px;
+    margin-right: 10px;
+  }
+}
+
+.card {
+  background: url(../resources/shurt.png) no-repeat 0 0;
+  height: 92px;
+  width: 62px;
+  &:not(:first-child) {
+    margin-left: -43px;
+  }
+  .dip();
+}
+
+.fly{
+  background: url(../resources/shurt.png) no-repeat 0 0;
+  height: 92px;
+  width: 62px;
+  .abs(656px, 60px);
+  transition: all 1s linear;
+}
+
+.cardTO0{
+  left: 920px;
+  top: 436px;
+}
+
+
+
