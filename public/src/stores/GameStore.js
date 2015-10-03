@@ -41,6 +41,9 @@ AppDispatcher.register(function (payload) {
             var player = _.findWhere(game.players,{id:id});
             player.cards = cards;
             break;
+        case GameConstants.SET_CURRENT_PLAYER:
+            game.currentPlayer = payload.data;
+            break;
         default : return true;
     }
     GameStore.emitChange();

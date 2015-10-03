@@ -92,16 +92,16 @@ module.exports = function (io) {
                     return new Promise(function (res, rej) {
                         Game = game;
                         io.to(game.id).emit('startGame', {
-                            id:game.id,
-                            players:game.players,
-                            winner:false,
-                            currentUser:-1
+                            id: game.id,
+                            players: game.players,
+                            winner: false,
+                            currentPlayer: game.players[0].id
                         });
                         game.initCards();
                         game.shuffleCards();
                         game.players.forEach(function (player) {
-                            game.userWantsCard(player.id, function (card) {
-                                io.sockets.connected[player.socketId].emit('addCard', {card:card})
+                            game.userWantsCard(player.id).then(function (card) {
+                                io.sockets.connected[player.socketId].emit('addCard', {card: card})
                             })
                         });
                         res(player)
@@ -112,36 +112,44 @@ module.exports = function (io) {
         });
 
         socket.on('someoneAddCard', function (data) {
-            if(!Game){
+            if (!Game) {
                 Game = API.getGameById(API.getUserById(data.id).roomId);
             }
             Game.players.forEach(function (player) {
                 var cards = player.cards.map(function (card) {
-                    if(player.id === data.id){
+                    if (player.id === data.id) {
                         return card;
-                    }else{
+                    } else {
                         return -1;
                     }
                 });
-                io.sockets.connected[player.socketId].emit('updateUsersCards',{id:data.id,cards:cards});
+                io.sockets.connected[player.socketId].emit('updateUsersCards', {id: data.id, cards: cards});
             })
         });
 
         socket.on('currPlayerAddCard', function (data) {
             var playerWhoWantedCard = Game.getPlayerById(data.id);
-            Game.userWantsCard(data.id, function () {
-                Game.players.forEach(function (player) {
-                    var cards = playerWhoWantedCard.cards.map(function (card) {
-                        if(player.id === playerWhoWantedCard.id){
-                            return card;
-                        }else{
-                            return -1;
-                        }
-                    });
-                    io.sockets.connected[player.socketId].emit('updateUsersCards',{id:data.id,cards:cards});
+            Game.userWantsCard(data.id)
+                .then(function (card) {
+                    emitAllCards(playerWhoWantedCard);
+                }, function (card) {
+                    emitAllCards(playerWhoWantedCard);
+                    console.log(playerWhoWantedCard, false)
                 })
+        });
+
+        function emitAllCards(playerWhoWantedCard){
+            Game.players.forEach(function (player) {
+                var cards = playerWhoWantedCard.cards.map(function (card) {
+                    if (player.id === playerWhoWantedCard.id) {
+                        return card;
+                    } else {
+                        return -1;
+                    }
+                });
+                io.sockets.connected[player.socketId].emit('updateUsersCards', {id: playerWhoWantedCard.id, cards: cards});
             })
-        })
+        }
 
     })
 };

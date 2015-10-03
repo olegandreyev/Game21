@@ -7,7 +7,8 @@ var keyMirror = require('react/lib/keyMirror');
 var GameConstants = keyMirror({
     ADD_CARD : null,
     INIT_GAME:null,
-    UPDATE_CARDS:null
+    UPDATE_CARDS:null,
+    SET_CURRENT_PLAYER:null
 });
 
 module.exports = GameConstants;

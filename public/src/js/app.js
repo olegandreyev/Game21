@@ -60,9 +60,9 @@ socket.on('addCard', function (data) {
     GameActions.addCard(data.card, id);
 });
 
-//socket.on('setCurrentPlayer', function (user) {
-//    console.log(user)
-//})
+socket.on('setCurrentPlayer', function (user) {
+    GameActions.setCurrentPlayer(user);
+})
 
 socket.on('updateUsersCards', function (data) {
     GameActions.updateCards(data)

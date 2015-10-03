@@ -22,6 +22,12 @@ var GameActions = {
             action:GameConstants.UPDATE_CARDS,
             data:data
         })
+    },
+    setCurrentPlayer: function (data) {
+        AppDispatcher.dispatch({
+            action:GameConstants.SET_CURRENT_PLAYER,
+            data:data.userId
+        })
     }
 };
 
