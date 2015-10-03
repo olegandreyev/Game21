@@ -6,7 +6,11 @@ body {
 }
 
 .actions{
-  .abs(52%,47%)
+  .abs(52%,47%);
+  &.no-click{
+    pointer-events: none;
+    opacity:0.3;
+}
 }
 
 .header {

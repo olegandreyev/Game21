@@ -26,6 +26,7 @@ var Card = React.createClass({
         var self = this;
         this.props.cb(function () {
             $(React.findDOMNode(self.refs.card)).removeClass('player-card');
+            $('.actions').removeClass('no-click');
         })
     },
     getCardClass: function (cardCode) {

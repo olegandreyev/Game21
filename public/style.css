@@ -213,6 +213,15 @@
 body {
   background: whitesmoke;
 }
+.actions {
+  position: absolute;
+  left: 52%;
+  top: 47%;
+}
+.actions.no-click {
+  pointer-events: none;
+  opacity: 0.3;
+}
 .header {
   background: url(../../resources/header.jpg) no-repeat center center;
   background-size: cover;

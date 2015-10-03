@@ -100,6 +100,7 @@ $(document).ready(function () {
 
 
 $.fn.makeCard = function (cb, delay) {
+    $('.actions').addClass('no-click');
     var left = parseInt(this.css('left'));
     var top = parseInt(this.css('top'));
     var width = this.get(0).offsetWidth / 2;
