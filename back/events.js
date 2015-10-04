@@ -133,21 +133,32 @@ module.exports = function (io) {
                 .then(function (card) {
                     emitAllCards(playerWhoWantedCard);
                 }, function (card) {
-                    emitAllCards(playerWhoWantedCard);
-                    console.log(playerWhoWantedCard, false)
-                })
+                    emitAllCards(playerWhoWantedCard)
+                        .then(function () {
+                            var thisPlayer =  _.findIndex(Game.players, function (player) {
+                                return player.id == playerWhoWantedCard.id;
+                            });
+                            if(thisPlayer < Game.players.length - 1){
+                                io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
+                            }
+                        })
+                    })
+
         });
 
         function emitAllCards(playerWhoWantedCard){
-            Game.players.forEach(function (player) {
-                var cards = playerWhoWantedCard.cards.map(function (card) {
-                    if (player.id === playerWhoWantedCard.id) {
-                        return card;
-                    } else {
-                        return -1;
-                    }
+            return new Promise (function (res, rej) {
+                Game.players.forEach(function (player) {
+                    var cards = playerWhoWantedCard.cards.map(function (card) {
+                        if (player.id === playerWhoWantedCard.id) {
+                            return card;
+                        } else {
+                            return -1;
+                        }
+                    });
+                    io.sockets.connected[player.socketId].emit('updateUsersCards', {id: playerWhoWantedCard.id, cards: cards});
                 });
-                io.sockets.connected[player.socketId].emit('updateUsersCards', {id: playerWhoWantedCard.id, cards: cards});
+                res();
             })
         }
 

@@ -25,9 +25,7 @@ Game.prototype.initCards36 =  function () {
     return arrCards;
 };
 Game.prototype.shuffleCards = function () {
-   this.cards = this.cards.sort(function () {
-        return Math.random()*100 - Math.random()*100
-    })
+   this.cards = _.shuffle(this.cards)
 };
 Game.prototype.getCard = function () {
     return this.cards.pop();

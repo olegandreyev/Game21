@@ -6,13 +6,17 @@ body {
 }
 
 .actions{
-  .abs(52%,47%);
+  .abs(580px,286px);
   &.no-click{
     pointer-events: none;
     opacity:0.3;
 }
 }
-
+.no-turn{
+  text-align: center;
+  font-size: 19px;
+  color:#ebe956;
+}
 .header {
   background: url(../../resources/header.jpg) no-repeat center center;
   background-size: cover;
@@ -156,12 +160,16 @@ body {
 
 .card {
   background: url(../resources/shurt.png) no-repeat 0 0;
-  height: 92px;
-  width: 62px;
+  height: 91px;
+  width: 61px;
   &:not(:first-child) {
     margin-left: -43px;
   }
   .dip();
+}
+
+.your-turn{
+  box-shadow: 0px 0px 127px 5px rgba(237,104,148,1);
 }
 
 .fly{

@@ -13,7 +13,7 @@ var Player = React.createClass({
             <div ref='player' className={"player spot"+pos}>
                 <div className="nick">
                     <span className='glyphicon glyphicon-user'></span>{player.nick}</div>
-                <div className="player-cards">
+                <div className={"player-cards "+(this.props.currentPlayer == player.id ? 'your-turn' :'')}>
                     {cards}
                 </div>
             </div>
