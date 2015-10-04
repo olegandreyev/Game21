@@ -17,7 +17,7 @@ var Chat = React.createClass({
     },
     componentDidMount: function () {
         var self = this;
-            this.props.store.on('change', function () {
+            this.props.store.addChangeListener(function () {
                 self.setState({messages: self.props.store.getMessages()});
                 var chat = React.findDOMNode(self.refs.chat);
                 if(localStorage.getItem('id') && chat) {

@@ -6,7 +6,7 @@ var Player = React.createClass({
     },
     componentDidMount : function () {
         var self = this;
-        GameStore.on('change', function () {
+        GameStore.addChangeListener(function () {
             if(GameStore.getGame().cards){
                 self.setState({showCards:''})
             }else{

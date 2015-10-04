@@ -15,7 +15,7 @@ var Lobby = React.createClass({
     },
     componentDidMount : function () {
         var self = this;
-        RoomStore.on('change', function () {
+        RoomStore.addChangeListener( function () {
             self.setState({room:RoomStore.getRoom()})
         })
     },

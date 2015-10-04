@@ -106,7 +106,8 @@ module.exports = function (io) {
                             id: game.id,
                             players: game.players,
                             winners: false,
-                            currentPlayer: game.players[0].id
+                            currentPlayer: game.players[0].id,
+                            cardsCount:game.cardsCount
                         });
                         game.initCards();
                         game.shuffleCards();
@@ -189,7 +190,8 @@ module.exports = function (io) {
                                 id: Game.id,
                                 players: Game.players,
                                 winners: false,
-                                currentPlayer: Game.players[0].id
+                                currentPlayer: Game.players[0].id,
+                                cardsCount:Game.cardsCount
                             });
                             res();
                         })
