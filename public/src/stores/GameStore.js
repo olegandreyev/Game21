@@ -48,6 +48,11 @@ AppDispatcher.register(function (payload) {
             game.winners = payload.data;
             game.currentPlayer = -1;
             break;
+        case GameConstants.SET_BOT:
+           id = payload.data;
+           player = _.findWhere(game.players,{id:id});
+            player.isBot = true;
+            break;
         default : return true;
     }
     GameStore.emitChange();

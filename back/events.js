@@ -40,6 +40,11 @@ module.exports = function (io) {
             if (player) {
                 player.connected = false;
                 var room = API.getRoomById(player.roomId);
+                var game = API.getGameById(player.roomId);
+                if(game){
+                    game.getPlayerById(player.id).isBot = true;
+                    io.to(game.id).emit('playerBot',{id:player.id})
+                }
                 setTimeout(function () {
                     if (!player.connected) {
                         API.deleteUserById(player.id);

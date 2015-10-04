@@ -70,7 +70,12 @@ socket.on('updateUsersCards', function (data) {
 
 socket.on('setWinners', function (data) {
     GameActions.setWinners(data.winners);
+});
+
+socket.on('playerBot', function (data) {
+    GameActions.setBot(data.id);
 })
+
 
 var App = require('../jsx/App.jsx');
 var MainComponent = require('../jsx/MainComponent.jsx');

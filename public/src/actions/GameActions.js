@@ -17,6 +17,12 @@ var GameActions = {
     wantCard: function (id) {
         socket.emit('currPlayerAddCard',{id:id})
     },
+    setBot : function (id) {
+      AppDispatcher.dispatch({
+          action:GameConstants.SET_BOT,
+          data:id
+      })
+    },
     updateCards : function (data) {
         AppDispatcher.dispatch({
             action:GameConstants.UPDATE_CARDS,

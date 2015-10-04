@@ -3,6 +3,9 @@ var Player = require('./Player.jsx');
 var GameActions = require('../actions/GameActions');
 var PlayingTable = React.createClass({
     getInitialState: function () {
+        window.onbeforeunload = function() {
+            return "Если вы обновите страницу вас выкенет из комнаты и ваше место займет бот";
+        }
         return {
             game: GameStore.getGame(),
             thisPlayer: localStorage.getItem('id')
@@ -17,6 +20,7 @@ var PlayingTable = React.createClass({
     componentDidMount: function () {
         var self = this;
         GameStore.addChangeListener(function () {
+            console.log(GameStore.getGame())
             self.setState({game: GameStore.getGame()})
         })
     },
