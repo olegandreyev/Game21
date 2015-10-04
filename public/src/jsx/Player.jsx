@@ -49,13 +49,16 @@ var Card = React.createClass({
         })
     },
     componentDidMount : function () {
+        $('.card').addClass('player-card')
         if(!GameStore.getGame().cards) {
             this.getCard();
         }
     },
     componentWillReceiveProps: function (props) {
-        if(this.props.card!= props.card) {
+        if(this.props.card!= props.card && !GameStore.getGame().cards) {
            this.getCard();
+        }else {
+            $('.card').removeClass('player-card');
         }
     },
     getCardClass: function (cardCode) {
