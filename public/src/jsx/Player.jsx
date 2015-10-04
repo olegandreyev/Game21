@@ -66,7 +66,6 @@ var Card = React.createClass({
             this.getCard();
         }
     },
-
     componentWillReceiveProps: function (props) {
         if(this.props.card!= props.card && !GameStore.getGame().cards) {
            this.getCard();

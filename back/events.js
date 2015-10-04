@@ -11,7 +11,6 @@ module.exports = function (io) {
 
         io.emit('updateRooms', API.getRooms());
         io.emit('updateOnline', API.getUsers());
-        io.emit('updateMessages', API.getMessages());
 
         socket.on('regUser', function (data) {
             player = API.createUser(data.nick, false, socket.id);
