@@ -110,7 +110,7 @@ $(document).ready(function () {
 })
 
 
-$.fn.makeCard = function (cb, delay) {
+$.fn.makeCard = function (cb,card, delay) {
     $('.actions').addClass('no-click');
     var left = parseInt(this.css('left'));
     var top = parseInt(this.css('top'));
@@ -123,7 +123,7 @@ $.fn.makeCard = function (cb, delay) {
         var div = document.createElement('div');
         div = $(div);
         $('.table-game').append(div);
-        div.addClass('fly');
+        div.addClass('fly '+card);
         setTimeout(function () {
             div.css('left', x).css('top', y);
             setTimeout(function () {

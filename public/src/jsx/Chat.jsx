@@ -26,6 +26,9 @@ var Chat = React.createClass({
             });
 
     },
+    componentWilUnmount : function () {
+      this.props.store.removeChangeListener();
+    },
     render: function () {
         var userID = localStorage.getItem('id');
         var messages = this.state.messages.map(function (message,i) {

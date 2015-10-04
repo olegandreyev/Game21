@@ -178,7 +178,7 @@ module.exports = function (io) {
                     })
                 }, function (failAll) {
                     return new Promise (function (res, rej) {
-                        io.to(Game.id).emit('setWinners',{winners:'noWinners'})
+                        io.to(Game.id).emit('setWinners',{winners:'noWinners',game:Game})
                         setTimeout(function () {
                             res();
                         },8000)

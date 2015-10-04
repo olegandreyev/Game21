@@ -1,15 +1,28 @@
 var GameStore = require('../stores/GameStore');
 
 var Player = React.createClass({
-    addCard: function (cb) {
-        $(React.findDOMNode(this.refs.player)).makeCard(cb, 100)
+    getInitialState: function () {
+        return {showCards: 'player-card'}
+    },
+    componentDidMount : function () {
+        var self = this;
+        GameStore.on('change', function () {
+            if(GameStore.getGame().cards){
+                self.setState({showCards:''})
+            }else{
+                self.setState({showCards:'player-card'})
+            }
+        })
+    },
+    addCard: function (cb,card) {
+        $(React.findDOMNode(this.refs.player)).makeCard(cb,card, 100)
     },
     render: function () {
         var self = this;
         var player = this.props.player;
         var pos = this.props.pos;
         var cards = this.props.player.cards.map(function (card, i) {
-            return <Card cb={self.addCard} card={card}/>
+            return <Card show={self.state.showCards} cb={self.addCard} card={card}/>
         });
 
         var points = player.points;
@@ -46,19 +59,17 @@ var Card = React.createClass({
         this.props.cb(function () {
             $(React.findDOMNode(self.refs.card)).removeClass('player-card');
             $('.actions').removeClass('no-click');
-        })
+        }, this.getCardClass(this.props.card))
     },
     componentDidMount : function () {
-        $('.card').addClass('player-card')
         if(!GameStore.getGame().cards) {
             this.getCard();
         }
     },
+
     componentWillReceiveProps: function (props) {
         if(this.props.card!= props.card && !GameStore.getGame().cards) {
            this.getCard();
-        }else {
-            $('.card').removeClass('player-card');
         }
     },
     getCardClass: function (cardCode) {
@@ -72,7 +83,7 @@ var Card = React.createClass({
     },
     render: function () {
         var card = this.props.card;
-            return <div ref='card' className={"player-card card "+(card !== -1 ? this.getCardClass(card): '')}></div>
+            return <div ref='card' className={this.props.show+" card "+(card !== -1 ? this.getCardClass(card): '')}></div>
 
     }
 });
