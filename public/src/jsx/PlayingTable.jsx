@@ -1,6 +1,9 @@
 var GameStore = require('../stores/GameStore');
 var Player = require('./Player.jsx');
 var GameActions = require('../actions/GameActions');
+var RoomStore = require('../stores/RoomStore');
+var RoomActions = require('../actions/RoomActions');
+var Chat = require('./Chat.jsx');
 var PlayingTable = React.createClass({
     getInitialState: function () {
         $(window).on('beforeunload', function () {
@@ -17,7 +20,7 @@ var PlayingTable = React.createClass({
     nextTurn: function () {
         GameActions.nextTurn(this.state.thisPlayer);
     },
-    componentWillUnmount : function () {
+    componentWillUnmount: function () {
         $(window).off('beforeunload');
     },
     componentDidMount: function () {
@@ -26,16 +29,19 @@ var PlayingTable = React.createClass({
             self.setState({game: GameStore.getGame()})
         })
     },
+    toggleChat: function () {
+        $('.chat').toggleClass('show');
+    },
     render: function () {
         var game = this.state.game;
         var cardsCount = game.cardsCount || 36;
         var thisPlayer = this.state.thisPlayer;
         var currentPlayer = game.currentPlayer;
-        if(currentPlayer != -1) {
+        if (currentPlayer != -1) {
             try {
                 var currentPlayerNick = _.findWhere(this.state.game.players, {id: currentPlayer}).nick || '';
-            }catch(e){
-                location.hash='#/mainPage/userList'
+            } catch (e) {
+                location.hash = '#/mainPage/userList'
             }
         }
 
@@ -45,30 +51,30 @@ var PlayingTable = React.createClass({
 
 
         var actions;
-        if(thisPlayer == currentPlayer){
+        if (thisPlayer == currentPlayer) {
             actions = (
                 <div className="actions">
                     <div className='no-turn'>Ваш ход <strong>{currentPlayerNick}!</strong></div>
-                    <div  onClick={this.wantCard} className="btn btn-info btn-lg">ЕЩЕ</div>
+                    <div onClick={this.wantCard} className="btn btn-info btn-lg">ЕЩЕ</div>
                     <div onClick={this.nextTurn} className="btn btn-danger btn-lg">ХВАТИТ</div>
                 </div>
             )
-        }else if(currentPlayer != -1){
+        } else if (currentPlayer != -1) {
             actions = (
                 <div className="actions">
                     <div className='no-turn'>Ход игрока: <strong>{currentPlayerNick}!</strong></div>
                 </div>
             )
-        }else if(game.winners == 'noWinners'){
+        } else if (game.winners == 'noWinners') {
             actions = (
                 <div className="actions">
                     <div className='no-turn'>Все проиграли!</div>
                 </div>
             )
-        }else {
-           var winners = game.winners.map(function (player) {
+        } else {
+            var winners = game.winners.map(function (player) {
                 return <div className='winner'>{player.nick}</div>
-            })
+            });
             actions = <div className='actions'>
                 <div className='no-turn'>Победители:</div>
                 {winners}
@@ -82,6 +88,13 @@ var PlayingTable = React.createClass({
                     {players}
                 </div>
                 {actions}
+                <div className='chat-wrapper'>
+                   <div className='btn btn-info chat-shower' onClick={this.toggleChat}>
+                       <span className='glyphicon glyphicon-comment'>
+                   </span>
+                   </div>
+                    <Chat size='5' actions={RoomActions} store={RoomStore}/>
+                </div>
             </div>
 
         )

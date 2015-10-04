@@ -30,6 +30,7 @@ var Chat = React.createClass({
       this.props.store.removeChangeListener();
     },
     render: function () {
+        var size = this.props.size || 6;
         var userID = localStorage.getItem('id');
         var messages = this.state.messages.map(function (message,i) {
             var yourMessageStyle = message.id === userID ? 'alert-info your-message' :'alert-success';
@@ -40,7 +41,7 @@ var Chat = React.createClass({
             </div>
         });
         return (
-            <div className='col-md-6 col-lg-6 col-sm-6'>
+            <div className={'col-md-'+size+' col-lg-'+size+' col-sm-'+size+" chat"}>
                 <div ref='chat' className="messages">{messages}</div>
                 <div className="row input">
                     <div className='col-md-9 col-lg-9 col-sm-9'>

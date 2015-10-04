@@ -41,9 +41,9 @@ module.exports = function (io) {
                 player.connected = false;
                 var room = API.getRoomById(player.roomId);
                 var game = API.getGameById(player.roomId);
-                if(game){
+                if (game) {
                     game.getPlayerById(player.id).isBot = true;
-                    io.to(game.id).emit('playerBot',{id:player.id})
+                    io.to(game.id).emit('playerBot', {id: player.id})
                 }
                 setTimeout(function () {
                     if (!player.connected) {
@@ -73,10 +73,10 @@ module.exports = function (io) {
         });
 
         socket.on('sendRoomMessage', function (message) {
-            var room = API.getRoomById(player.roomId);
+            var room = API.getRoomById(player.roomId) || API.getGameById(player.roomId);
             message.date = Date.now();
             room.chat.push(message);
-            io.to(room.id).emit('updateRoomMessages',room.chat);
+            io.to(room.id).emit('updateRoomMessages', room.chat);
         });
         socket.on('joinRoom', function (joiner) {
             var room = API.getRoomById(joiner.roomId);
@@ -101,22 +101,17 @@ module.exports = function (io) {
         socket.on('startGame', function (data) {
             API.createGame(data.id)
                 .then(function (game) {
-                    return new Promise(function (res, rej) {
-                        Game = game;
-                        io.to(game.id).emit('startGame', {
-                            id: game.id,
-                            players: game.players,
-                            winners: false,
-                            currentPlayer: game.players[0].id,
-                            cardsCount:game.cardsCount
-                        });
-                        game.initCards();
-                        game.shuffleCards();
-                        initStartCards();
-                        res(player)
-                    })
-                }).then(function () {
-                    io.to(Game.id).emit('setCurrentPlayer', {userId: player.id})
+                    Game = game;
+                    io.to(game.id).emit('startGame', {
+                        id: game.id,
+                        players: game.players,
+                        winners: false,
+                        currentPlayer: game.players[0].id,
+                        cardsCount: game.cardsCount
+                    });
+                    game.initCards();
+                    game.shuffleCards();
+                    initStartCards();
                 })
         });
 
@@ -132,8 +127,12 @@ module.exports = function (io) {
                         return -1;
                     }
                 });
-                var points = player.id == data.id ?  player.points: -1;
-                io.sockets.connected[player.socketId].emit('updateUsersCards', {id: data.id,points:points,cards: cards});
+                var points = player.id == data.id ? player.points : -1;
+                io.sockets.connected[player.socketId].emit('updateUsersCards', {
+                    id: data.id,
+                    points: points,
+                    cards: cards
+                });
             })
         });
 
@@ -160,34 +159,34 @@ module.exports = function (io) {
                 return player.id == playerWhoTurn.id;
             });
             if (thisPlayer < Game.players.length - 1) {
-                    io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
+                io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
             } else {
                 setTimeout(function () {
                     endGame();
-                },1500)
+                }, 1500)
             }
         }
 
         function endGame() {
             Game.setWinner()
                 .then(function (winners) {
-                    return new Promise (function (res, rej) {
-                        io.to(Game.id).emit('setWinners',{winners:winners,game:Game})
+                    return new Promise(function (res, rej) {
+                        io.to(Game.id).emit('setWinners', {winners: winners, game: Game})
                         setTimeout(function () {
                             res();
-                        },8000)
+                        }, 8000)
                     })
                 }, function (failAll) {
-                    return new Promise (function (res, rej) {
-                        io.to(Game.id).emit('setWinners',{winners:'noWinners',game:Game});
+                    return new Promise(function (res, rej) {
+                        io.to(Game.id).emit('setWinners', {winners: 'noWinners', game: Game});
                         setTimeout(function () {
                             res();
-                        },8000)
+                        }, 8000)
                     })
                 }).then(function () {
-                    if(Game.handsCount == Game.currentHand){
+                    if (Game.handsCount == Game.currentHand) {
                         io.to(Game.id).emit('closeGame');
-                    }else {
+                    } else {
                         Game.newHand().then(function () {
                             return new Promise(function (res, rej) {
                                 io.to(Game.id).emit('startGame', {
@@ -206,13 +205,14 @@ module.exports = function (io) {
                 })
         }
 
-        function initStartCards(){
+        function initStartCards() {
             Game.players.forEach(function (player) {
                 Game.userWantsCard(player.id).then(function (card) {
                     io.sockets.connected[player.socketId].emit('addCard', {card: card})
                 })
             });
         }
+
         function emitChangeCards(playerWhoTurn) {
             return new Promise(function (res, rej) {
                 Game.players.forEach(function (player) {
@@ -226,7 +226,7 @@ module.exports = function (io) {
                     var points = playerWhoTurn.id == player.id ? playerWhoTurn.points : -1;
                     io.sockets.connected[player.socketId].emit('updateUsersCards', {
                         id: playerWhoTurn.id,
-                        points:points,
+                        points: points,
                         cards: cards
                     });
                 });

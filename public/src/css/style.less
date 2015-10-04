@@ -87,7 +87,27 @@ body {
     margin-right: 4px;
   }
 }
-
+.chat-wrapper{
+  .chat-shower{
+    position: fixed;
+    top: 374px;
+    left: 2px;
+  }
+  .chat {
+    position: fixed;
+    top: 410px;
+    left: -400px;
+    width: 400px;
+    padding: 0;
+    transition: left 0.5s ease-out;
+    &.show{
+      left:0
+    }
+    .btn{
+      margin-left: -20px;
+    }
+  }
+}
 .table-game {
   background: url('../resources/table.png') no-repeat center center;
   overflow-x: hidden;
@@ -148,6 +168,7 @@ body {
   }
 
 }
+
 .create-room-form{
   margin-top: -20px;
 }
@@ -196,6 +217,7 @@ body {
 
 .your-turn{
   box-shadow: 0px 0px 127px 5px rgba(237,104,148,1);
+  .dip();
 }
 
 .fly{
