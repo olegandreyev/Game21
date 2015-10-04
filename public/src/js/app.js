@@ -68,6 +68,9 @@ socket.on('updateUsersCards', function (data) {
     GameActions.updateCards(data)
 });
 
+socket.on('setWinners', function (data) {
+    GameActions.setWinners(data.winners);
+})
 
 var App = require('../jsx/App.jsx');
 var MainComponent = require('../jsx/MainComponent.jsx');
@@ -103,20 +106,22 @@ $.fn.makeCard = function (cb, delay) {
     $('.actions').addClass('no-click');
     var left = parseInt(this.css('left'));
     var top = parseInt(this.css('top'));
-    var width = this.get(0).offsetWidth / 2;
-    var height = this.get(0).offsetHeight / 2;
-    var x = left + width;
-    var y = top + width;
+    if(this.get(0)) {
+        var width = this.get(0).offsetWidth / 2;
+        var height = this.get(0).offsetHeight / 2;
+        var x = left + width;
+        var y = top + height;
 
-    var div = document.createElement('div');
-    div = $(div);
-    $('.table-game').append(div);
-    div.addClass('fly');
-    setTimeout(function () {
-        div.css('left', x).css('top', y);
+        var div = document.createElement('div');
+        div = $(div);
+        $('.table-game').append(div);
+        div.addClass('fly');
         setTimeout(function () {
-            div.remove();
-            cb();
-        }, 1000)
-    }, delay || 500)
+            div.css('left', x).css('top', y);
+            setTimeout(function () {
+                div.remove();
+                cb();
+            }, 1000)
+        }, delay || 500)
+    }
 };

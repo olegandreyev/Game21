@@ -74,7 +74,6 @@ var API = {
             game.players = game.players.map(function (player) {
                 player.points = 0;
                 player.cards = [];
-                player.isBusted = false;
                 return player;
             });
             var createdGame = new Game(game.id, game.players, game.cards);

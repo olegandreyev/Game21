@@ -94,16 +94,12 @@ module.exports = function (io) {
                         io.to(game.id).emit('startGame', {
                             id: game.id,
                             players: game.players,
-                            winner: false,
+                            winners: false,
                             currentPlayer: game.players[0].id
                         });
                         game.initCards();
                         game.shuffleCards();
-                        game.players.forEach(function (player) {
-                            game.userWantsCard(player.id).then(function (card) {
-                                io.sockets.connected[player.socketId].emit('addCard', {card: card})
-                            })
-                        });
+                        initStartCards();
                         res(player)
                     })
                 }).then(function () {
@@ -128,35 +124,88 @@ module.exports = function (io) {
         });
 
         socket.on('currPlayerAddCard', function (data) {
-            var playerWhoWantedCard = Game.getPlayerById(data.id);
+            var playerWhoTurn = Game.getPlayerById(data.id);
             Game.userWantsCard(data.id)
                 .then(function (card) {
-                    emitAllCards(playerWhoWantedCard);
+                    emitAllCards(playerWhoTurn);
                 }, function (card) {
-                    emitAllCards(playerWhoWantedCard)
+                    emitAllCards(playerWhoTurn)
                         .then(function () {
-                            var thisPlayer =  _.findIndex(Game.players, function (player) {
-                                return player.id == playerWhoWantedCard.id;
-                            });
-                            if(thisPlayer < Game.players.length - 1){
-                                io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
-                            }
+                            nextTurnOrEnd(playerWhoTurn);
                         })
-                    })
-
+                })
         });
 
-        function emitAllCards(playerWhoWantedCard){
-            return new Promise (function (res, rej) {
+        socket.on('currPlayerMissed', function (data) {
+            var playerWhoTurn = Game.getPlayerById(data.id);
+            nextTurnOrEnd(playerWhoTurn)
+        });
+
+        function nextTurnOrEnd(playerWhoTurn) {
+            var thisPlayer = _.findIndex(Game.players, function (player) {
+                return player.id == playerWhoTurn.id;
+            });
+            if (thisPlayer < Game.players.length - 1) {
+                io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
+            } else {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            Game.setWinner()
+                .then(function (winners) {
+                    return new Promise (function (res, rej) {
+                        io.to(Game.id).emit('setWinners',{winners:winners})
+                        setTimeout(function () {
+                            res();
+                        },5000)
+                    })
+                }, function (failAll) {
+                    return new Promise (function (res, rej) {
+                        io.to(Game.id).emit('setWinners',{winners:'noWinners'})
+                        setTimeout(function () {
+                            res();
+                        },8000)
+                    })
+                }).then(function () {
+                    Game.newHand().then(function () {
+                        return new Promise(function (res, rej) {
+                            io.to(Game.id).emit('startGame', {
+                                id: Game.id,
+                                players: Game.players,
+                                winners: false,
+                                currentPlayer: Game.players[0].id
+                            });
+                            res();
+                        })
+                    }).then(function () {
+                        initStartCards();
+                    })
+                })
+        }
+
+        function initStartCards(){
+            Game.players.forEach(function (player) {
+                Game.userWantsCard(player.id).then(function (card) {
+                    io.sockets.connected[player.socketId].emit('addCard', {card: card})
+                })
+            });
+        }
+        function emitAllCards(playerWhoTurn) {
+            return new Promise(function (res, rej) {
                 Game.players.forEach(function (player) {
-                    var cards = playerWhoWantedCard.cards.map(function (card) {
-                        if (player.id === playerWhoWantedCard.id) {
+                    var cards = playerWhoTurn.cards.map(function (card) {
+                        if (player.id === playerWhoTurn.id) {
                             return card;
                         } else {
                             return -1;
                         }
                     });
-                    io.sockets.connected[player.socketId].emit('updateUsersCards', {id: playerWhoWantedCard.id, cards: cards});
+                    io.sockets.connected[player.socketId].emit('updateUsersCards', {
+                        id: playerWhoTurn.id,
+                        cards: cards
+                    });
                 });
                 res();
             })

@@ -8,7 +8,8 @@ var GameConstants = keyMirror({
     ADD_CARD : null,
     INIT_GAME:null,
     UPDATE_CARDS:null,
-    SET_CURRENT_PLAYER:null
+    SET_CURRENT_PLAYER:null,
+    SET_WINNERS:null
 });
 
 module.exports = GameConstants;

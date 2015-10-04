@@ -44,7 +44,7 @@ Game.prototype.userWantsCard = function (id) {
         var card = self.getCard();
         player.points += self.getPoints(card);
         player.cards.push(card);
-        if(player.points <= 21) {
+        if(player.points < 21) {
             resolve(card)
         }else{
             reject(card)
@@ -61,13 +61,55 @@ Game.prototype.getPoints = function (card) {
         card = card % 13;
         return this.points54[card];
     }
-}
+};
 
 Game.prototype.points36 = {
     0:6, 1:7, 2:8, 3:9, 4:10, 5:2, 6:3, 7:4, 8:11
 };
 Game.prototype.points54 = {
     0:2,1:3,2:4,3:5,4:6,5:7,6:8,7:9,8:10,9:2,10:3,11:4,12:11
+};
+
+Game.prototype.setWinner = function () {
+    var self = this;
+    return new Promise(function (res, rej) {
+        var winners = [];
+        var filteredPlayers = self.players.filter(function (player) {
+            return player.points <= 21;
+        });
+        if(filteredPlayers.length == 0){
+            rej(false);
+        }else {
+            filteredPlayers = filteredPlayers.sort(function (player1, player2) {
+                return player1.points - player2.points;
+            });
+            var max = filteredPlayers[filteredPlayers.length - 1].points;
+            filteredPlayers.forEach(function (player) {
+                if (player.points == max) {
+                    winners.push(player)
+                }
+            });
+            res(winners)
+        }
+    });
+};
+Game.prototype.clearCards = function () {
+    this.cards = [];
+};
+Game.prototype.newHand = function () {
+    var self = this;
+    return new Promise(function (res, rej) {
+        self.clearCards();
+        self.initCards();
+        self.players = self.players.map(function (player) {
+            player.cards = [];
+            player.points = 0;
+            return player;
+        });
+        self.winners = false;
+
+        res()
+    })
 }
 
 

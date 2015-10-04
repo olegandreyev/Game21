@@ -14,8 +14,8 @@ var GameActions = {
             data:data
         })
     },
-    wantCard: function () {
-        socket.emit('currPlayerAddCard',{id:localStorage.getItem('id')})
+    wantCard: function (id) {
+        socket.emit('currPlayerAddCard',{id:id})
     },
     updateCards : function (data) {
         AppDispatcher.dispatch({
@@ -27,6 +27,15 @@ var GameActions = {
         AppDispatcher.dispatch({
             action:GameConstants.SET_CURRENT_PLAYER,
             data:data.userId
+        })
+    },
+    nextTurn : function (id) {
+        socket.emit('currPlayerMissed',{id:id})
+    },
+    setWinners: function (winners) {
+        AppDispatcher.dispatch({
+            action:GameConstants.SET_WINNERS,
+            data:winners
         })
     }
 };

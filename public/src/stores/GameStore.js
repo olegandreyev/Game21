@@ -44,6 +44,10 @@ AppDispatcher.register(function (payload) {
         case GameConstants.SET_CURRENT_PLAYER:
             game.currentPlayer = payload.data;
             break;
+        case GameConstants.SET_WINNERS:
+            game.winners = payload.data;
+            game.currentPlayer = -1;
+            break;
         default : return true;
     }
     GameStore.emitChange();
