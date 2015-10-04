@@ -1,11 +1,9 @@
 /**
  * Created by ПК on 28.09.2015.
  */
-var ChatActions = require('../actions/ChatActions');
-var ChatStore = require('../stores/GlobalChatStore');
 var Chat = React.createClass({
     getInitialState: function () {
-        return {messages: ChatStore.getMessages(), message: ''}
+        return {messages: this.props.store.getMessages() || [], message: ''}
     },
     handleChange: function (e) {
         this.setState({message: e.target.value})
@@ -13,15 +11,15 @@ var Chat = React.createClass({
     sendMessage: function (e) {
         e.preventDefault();
         if(this.state.message) {
-            ChatActions.sendMessage(this.state.message);
+            this.props.actions.sendMessage(this.state.message);
             this.setState({message: ''})
         }
     },
     componentDidMount: function () {
         var self = this;
-            ChatStore.on('change', function () {
-                self.setState({messages: ChatStore.getMessages()});
-                var chat = $('#chat').get(0);
+            this.props.store.on('change', function () {
+                self.setState({messages: self.props.store.getMessages()});
+                var chat = React.findDOMNode(self.refs.chat);
                 if(localStorage.getItem('id') && chat) {
                     chat.scrollTop = chat.scrollHeight;
                 }
@@ -40,7 +38,7 @@ var Chat = React.createClass({
         });
         return (
             <div className='col-md-6 col-lg-6 col-sm-6'>
-                <div id='chat' className="messages">{messages}</div>
+                <div ref='chat' className="messages">{messages}</div>
                 <div className="row input">
                     <div className='col-md-9 col-lg-9 col-sm-9'>
                         <form className="form" onSubmit={this.sendMessage}>

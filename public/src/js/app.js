@@ -71,7 +71,10 @@ socket.on('updateUsersCards', function (data) {
 socket.on('setWinners', function (data) {
     GameActions.setWinners(data);
 });
-
+socket.on('updateRoomMessages', function (messages) {
+    console.log(messages,'fdfdf');
+    RoomActions.setMessages(messages);
+})
 socket.on('playerBot', function (data) {
     GameActions.setBot(data.id);
 })

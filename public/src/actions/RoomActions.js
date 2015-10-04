@@ -18,6 +18,20 @@ var RoomActions = {
     },
     startGame: function (id) {
         socket.emit('startGame',{id:id})
+    },
+    sendMessage: function (text) {
+        var message = {
+            id:localStorage.getItem('id'),
+            nick:localStorage.getItem('nick'),
+            message:text
+        };
+        socket.emit('sendRoomMessage',message);
+    },
+    setMessages: function (messages) {
+        AppDispatcher.dispatch({
+            action:RoomConstants.NEW_MESSAGE,
+            data:messages
+        });
     }
 };
 

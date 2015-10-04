@@ -1,5 +1,7 @@
 var Router = require('react-router');
 var Chat = require('./Chat.jsx');
+var ChatActions = require('../actions/ChatActions');
+var ChatStore = require('../stores/GlobalChatStore');
 var MainComponent = React.createClass({
     getInitialState: function () {
         return {activeTab: 0}
@@ -39,7 +41,7 @@ var MainComponent = React.createClass({
                 <div className="container-fluid">
                     <div className="row">
                         <Router.RouteHandler/>
-                        <Chat/>
+                        <Chat actions={ChatActions} store={ChatStore}/>
                     </div>
                 </div>
             </div>

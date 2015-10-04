@@ -15,6 +15,9 @@ var RoomStore = _.extend({},EventEmitter.prototype,{
     getRoom: function () {
         return createdRoom;
     },
+    getMessages: function () {
+      return createdRoom.chat;
+    },
     setRoom : function (room) {
       createdRoom = room;
     },
@@ -37,6 +40,11 @@ AppDispatcher.register(function(payload) {
             break;
         case  RoomConstants.CHANGE_STATE:
             createNewRoom(payload.data);
+            break;
+        case RoomConstants.NEW_MESSAGE:
+            if(payload.data.length > 0) {
+                createdRoom.chat.push(payload.data[payload.data.length - 1]);
+            }
             break;
         default:
             return true;

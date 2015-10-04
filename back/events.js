@@ -20,6 +20,7 @@ module.exports = function (io) {
             io.emit('updateOnline', API.getUsers());
         });
 
+
         socket.on('logIn', function (data) {
             player = API.getUserById(data.id);
             if (!player) {
@@ -71,6 +72,12 @@ module.exports = function (io) {
             socket.join(room.id);
         });
 
+        socket.on('sendRoomMessage', function (message) {
+            var room = API.getRoomById(player.roomId);
+            message.date = Date.now();
+            room.chat.push(message);
+            io.to(room.id).emit('updateRoomMessages',room.chat);
+        });
         socket.on('joinRoom', function (joiner) {
             var room = API.getRoomById(joiner.roomId);
             var player = API.getUserById(joiner.playerId);

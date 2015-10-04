@@ -55,6 +55,7 @@ var API = {
         room.id = Date.now() + (room.cards / Math.random() * 33).toFixed();
         leader.roomId = room.id;
         room.players = [leader];
+        room.chat = [];
         rooms.push(room);
         return room;
     },

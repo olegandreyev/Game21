@@ -1,7 +1,7 @@
 
 var RoomStore = require('../stores/RoomStore');
 var RoomActions = require('../actions/RoomActions');
-
+var Chat = require('./Chat.jsx');
 var Lobby = React.createClass({
     getInitialState: function () {
       return {room: RoomStore.getRoom()}
@@ -49,8 +49,7 @@ var Lobby = React.createClass({
                             {players}
                         </ul>
                     </div>
-                    <div className="col-md-6 col-lg-6 col-sm-6">
-                    </div>
+                        <Chat actions={RoomActions} store={RoomStore} />
                 </div>
                 <div className="row actions-lobby">
                     <div className="col-md-6 col-lg-6 col-sm-6">

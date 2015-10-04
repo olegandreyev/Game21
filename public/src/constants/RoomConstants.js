@@ -5,7 +5,8 @@
 var keyMirror = require('react/lib/keyMirror');
 
 var RoomConstants = keyMirror({
-    CHANGE_STATE:null
+    CHANGE_STATE:null,
+    NEW_MESSAGE:null
 });
 
 module.exports = RoomConstants;
