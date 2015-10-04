@@ -124,7 +124,8 @@ module.exports = function (io) {
                         return -1;
                     }
                 });
-                io.sockets.connected[player.socketId].emit('updateUsersCards', {id: data.id, cards: cards});
+                var points = player.id == data.id ?  player.points: -1;
+                io.sockets.connected[player.socketId].emit('updateUsersCards', {id: data.id,points:points,cards: cards});
             })
         });
 
@@ -132,9 +133,9 @@ module.exports = function (io) {
             var playerWhoTurn = Game.getPlayerById(data.id);
             Game.userWantsCard(data.id)
                 .then(function (card) {
-                    emitAllCards(playerWhoTurn);
+                    emitChangeCards(playerWhoTurn);
                 }, function (card) {
-                    emitAllCards(playerWhoTurn)
+                    emitChangeCards(playerWhoTurn)
                         .then(function () {
                             nextTurnOrEnd(playerWhoTurn);
                         })
@@ -151,9 +152,13 @@ module.exports = function (io) {
                 return player.id == playerWhoTurn.id;
             });
             if (thisPlayer < Game.players.length - 1) {
-                io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
+                setTimeout(function () {
+                    io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
+                },1500)
             } else {
-                endGame();
+                setTimeout(function () {
+                    endGame();
+                },1500)
             }
         }
 
@@ -197,7 +202,7 @@ module.exports = function (io) {
                 })
             });
         }
-        function emitAllCards(playerWhoTurn) {
+        function emitChangeCards(playerWhoTurn) {
             return new Promise(function (res, rej) {
                 Game.players.forEach(function (player) {
                     var cards = playerWhoTurn.cards.map(function (card) {
@@ -207,8 +212,10 @@ module.exports = function (io) {
                             return -1;
                         }
                     });
+                    var points = playerWhoTurn.id == player.id ? playerWhoTurn.points : -1;
                     io.sockets.connected[player.socketId].emit('updateUsersCards', {
                         id: playerWhoTurn.id,
+                        points:points,
                         cards: cards
                     });
                 });

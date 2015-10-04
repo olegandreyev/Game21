@@ -5,6 +5,7 @@ var App = React.createClass({
         if(!localStorage.getItem('nick') || !localStorage.getItem('id')){
             location.hash='#/noReg'
         }
+        $(window).off('beforeunload');
     },
     render : function () {
       return  <div id="content">
