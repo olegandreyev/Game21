@@ -70,15 +70,15 @@ var API = {
     createGame: function (id) {
         var self = this;
         return new Promise(function (resolve, reject) {
-            var game = self.getRoomById(id);
+            var room = self.getRoomById(id);
             self.deleteRoomById(id);
-            game.players = game.players.map(function (player) {
+            room.players = room.players.map(function (player) {
                 player.points = 0;
                 player.cards = [];
                 player.isBot = false;
                 return player;
             });
-            var createdGame = new Game(game.id, game.players, game.cards);
+            var createdGame = new Game(room.id, room.players, room.cards, room.chat, room.handsCount);
             games.push(createdGame);
             resolve(createdGame);
         })

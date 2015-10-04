@@ -46,6 +46,7 @@ var Lobby = React.createClass({
                 <p className="navbar-text navbar-right">Чатик комнаты<span className='glyphicon glyphicon-comment'></span></p>
                 <div className="row">
                     <div className="col-md-6 col-lg-6 col-sm-6">
+                        <p>Игроки 3/4</p>
                         <ul className="list-group users-lobby">
                             {players}
                         </ul>

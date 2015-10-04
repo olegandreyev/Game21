@@ -79,6 +79,9 @@ socket.on('playerBot', function (data) {
     GameActions.setBot(data.id);
 })
 
+socket.on('closeGame', function () {
+    alert('close game!!!')
+});
 
 var App = require('../jsx/App.jsx');
 var MainComponent = require('../jsx/MainComponent.jsx');

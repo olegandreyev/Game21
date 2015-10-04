@@ -18,7 +18,7 @@ var MainComponent = React.createClass({
 
                         <p>Создай комнату и начни играть уже сейчас!!</p>
 
-                        <p><a className="btn btn-primary btn-lg" href="#" role="button">Начать играть!</a></p>
+                        <p><a className="btn btn-primary btn-lg" href="#/mainPage/createRoom" role="button">Начать играть!</a></p>
                     </div>
                 </div>
                 <div className='navbar'>
@@ -36,7 +36,7 @@ var MainComponent = React.createClass({
                             <a href="#/mainPage/createRoom">Создать комнату</a>
                         </li>
                     </ul>
-                    <p className="navbar-text navbar-right">Чатик <span className='glyphicon glyphicon-comment'></span></p>
+                    <p className="navbar-text navbar-right global-chat">Чатик <span className='glyphicon glyphicon-comment'></span></p>
                 </div>
                 <div className="container-fluid">
                     <div className="row">

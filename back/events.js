@@ -50,6 +50,7 @@ module.exports = function (io) {
                         API.deleteUserById(player.id);
                         if (room) {
                             API.deleteUserFromRoom(room, player);
+                            room.leader = room.players[0].id;
                             io.to(room.id).emit('changeRoomState', room)
                         }
                     }
@@ -178,26 +179,30 @@ module.exports = function (io) {
                     })
                 }, function (failAll) {
                     return new Promise (function (res, rej) {
-                        io.to(Game.id).emit('setWinners',{winners:'noWinners',game:Game})
+                        io.to(Game.id).emit('setWinners',{winners:'noWinners',game:Game});
                         setTimeout(function () {
                             res();
                         },8000)
                     })
                 }).then(function () {
-                    Game.newHand().then(function () {
-                        return new Promise(function (res, rej) {
-                            io.to(Game.id).emit('startGame', {
-                                id: Game.id,
-                                players: Game.players,
-                                winners: false,
-                                currentPlayer: Game.players[0].id,
-                                cardsCount:Game.cardsCount
-                            });
-                            res();
+                    if(Game.handsCount == Game.currentHand){
+                        io.to(Game.id).emit('closeGame');
+                    }else {
+                        Game.newHand().then(function () {
+                            return new Promise(function (res, rej) {
+                                io.to(Game.id).emit('startGame', {
+                                    id: Game.id,
+                                    players: Game.players,
+                                    winners: false,
+                                    currentPlayer: Game.players[0].id,
+                                    cardsCount: Game.cardsCount
+                                });
+                                res();
+                            })
+                        }).then(function () {
+                            initStartCards();
                         })
-                    }).then(function () {
-                        initStartCards();
-                    })
+                    }
                 })
         }
 

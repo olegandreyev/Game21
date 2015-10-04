@@ -3,11 +3,14 @@
  */
     var _ = require('underscore');
 var Promise = require('bluebird');
-var Game = function (id, players, cardsCount) {
+var Game = function (id, players, cardsCount, chat, handsCount) {
     this.id = id;
     this.players = players;
     this.cards = [];
     this.cardsCount = cardsCount;
+    this.chat = chat;
+    this.handsCount = handsCount;
+    this.currentHand = 0;
 };
 
 Game.prototype.initCards54 = function () {
@@ -77,6 +80,7 @@ Game.prototype.setWinner = function () {
     var self = this;
     return new Promise(function (res, rej) {
         var winners = [];
+        self.currentHand++;
         var filteredPlayers = self.players.filter(function (player) {
             return player.points <= 21;
         });
