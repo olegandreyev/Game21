@@ -101,6 +101,7 @@ Game.prototype.newHand = function () {
     return new Promise(function (res, rej) {
         self.clearCards();
         self.initCards();
+        self.shuffleCards();
         self.players = self.players.map(function (player) {
             player.cards = [];
             player.points = 0;

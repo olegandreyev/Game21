@@ -20,7 +20,6 @@ var PlayingTable = React.createClass({
     componentDidMount: function () {
         var self = this;
         GameStore.addChangeListener(function () {
-            console.log(GameStore.getGame())
             self.setState({game: GameStore.getGame()})
         })
     },

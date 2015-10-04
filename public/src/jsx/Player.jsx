@@ -1,13 +1,19 @@
 var Player = React.createClass({
+    getInitialState: function () {
+      return {player:this.props.player,pos:this.props.pos}
+    },
     addCard: function (cb) {
         $(React.findDOMNode(this.refs.player)).makeCard(cb, 500)
     },
+    componentWillReceiveProps: function (props) {
+        this.setState({player:props.player,pos:props.pos})
+    },
     render: function () {
         var self = this;
-        var player = this.props.player;
-        var pos = this.props.pos;
-        var cards = this.props.player.cards.map(function (card, i) {
-            return <Card cb={self.addCard} card={card}/>
+        var player = this.state.player;
+        var pos = this.state.pos;
+        var cards = this.state.player.cards.map(function (card, i) {
+            return <Card key={i} cb={self.addCard} card={card}/>
         });
         return (
             <div ref='player' className={"player spot"+pos}>
