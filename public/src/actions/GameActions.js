@@ -38,10 +38,10 @@ var GameActions = {
     nextTurn : function (id) {
         socket.emit('currPlayerMissed',{id:id})
     },
-    setWinners: function (winners) {
+    setWinners: function (data) {
         AppDispatcher.dispatch({
             action:GameConstants.SET_WINNERS,
-            data:winners
+            data:data
         })
     }
 };

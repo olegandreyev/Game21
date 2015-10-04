@@ -73,6 +73,7 @@ var PlayingTable = React.createClass({
                 {winners}
             </div>
         }
+
         return (
             <div>
                 <div className="table-game size2">

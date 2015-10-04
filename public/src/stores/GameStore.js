@@ -38,14 +38,17 @@ AppDispatcher.register(function (payload) {
         case GameConstants.UPDATE_CARDS:
             var id = payload.data.id;
             var cards = payload.data.cards;
+            var points = payload.data.points;
             var player = _.findWhere(game.players,{id:id});
             player.cards = cards;
+            player.points = points;
             break;
         case GameConstants.SET_CURRENT_PLAYER:
             game.currentPlayer = payload.data;
             break;
         case GameConstants.SET_WINNERS:
-            game.winners = payload.data;
+            game = payload.data.game;
+            game.winners = payload.data.winners;
             game.currentPlayer = -1;
             break;
         case GameConstants.SET_BOT:

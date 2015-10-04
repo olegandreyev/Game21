@@ -152,9 +152,7 @@ module.exports = function (io) {
                 return player.id == playerWhoTurn.id;
             });
             if (thisPlayer < Game.players.length - 1) {
-                setTimeout(function () {
                     io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
-                },1500)
             } else {
                 setTimeout(function () {
                     endGame();
@@ -166,10 +164,10 @@ module.exports = function (io) {
             Game.setWinner()
                 .then(function (winners) {
                     return new Promise (function (res, rej) {
-                        io.to(Game.id).emit('setWinners',{winners:winners})
+                        io.to(Game.id).emit('setWinners',{winners:winners,game:Game})
                         setTimeout(function () {
                             res();
-                        },5000)
+                        },8000)
                     })
                 }, function (failAll) {
                     return new Promise (function (res, rej) {
