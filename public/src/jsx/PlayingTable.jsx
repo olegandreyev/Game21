@@ -28,6 +28,7 @@ var PlayingTable = React.createClass({
     },
     render: function () {
         var game = this.state.game;
+        var cardsCount = game.cardsCount || 36;
         var thisPlayer = this.state.thisPlayer;
         var currentPlayer = game.currentPlayer;
         if(currentPlayer != -1) {
@@ -75,7 +76,7 @@ var PlayingTable = React.createClass({
         }
 
         return (
-            <div>
+            <div className={'cardsCount'+cardsCount}>
                 <div className="table-game size2">
                     <div className="cards"></div>
                     {players}

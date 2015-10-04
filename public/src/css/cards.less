@@ -1,187 +1,344 @@
-.player-card.card{
+.player-card.card {
   display: none;
 }
 
-.cardClubs(@i){
+.cardClubs(@i) {
   background: url('../resources/default_cards/clubs_@{i}.png') !important;
   background-size: cover !important;
 }
-.cardHearts(@i){
-  background: url('../resources/default_cards/hearts_@{i}.png') !important ;
+
+.cardHearts(@i) {
+  background: url('../resources/default_cards/hearts_@{i}.png') !important;
   background-size: cover !important;
 }
-.cardDiamonds(@i){
+
+.cardDiamonds(@i) {
   background: url('../resources/default_cards/diamonds_@{i}.png') !important;
   background-size: cover !important;
 }
-.cardSpades(@i){
+
+.cardSpades(@i) {
   background: url('../resources/default_cards/spades_@{i}.png') !important;
   background-size: cover !important;
 }
 
 //clubs
-.club_0{
-  .cardClubs(2)
+.club_0 {
+  .cardClubs(2);
+  .cardsCount36 & {
+    .cardClubs(6);
+  }
 }
-.club_1{
-  .cardClubs(3)
+
+.club_1 {
+  .cardClubs(3);
+  .cardsCount36 & {
+    .cardClubs(7);
+  }
 }
-.club_2{
-  .cardClubs(4)
+
+.club_2 {
+  .cardClubs(4);
+  .cardsCount36 & {
+    .cardClubs(8);
+  }
 }
-.club_3{
-  .cardClubs(5)
+
+.club_3 {
+  .cardClubs(5);
+  .cardsCount36 & {
+    .cardClubs(9);
+  }
 }
-.club_4{
-  .cardClubs(6)
+
+.club_4 {
+  .cardClubs(6);
+  .cardsCount36 & {
+    .cardClubs(10);
+  }
 }
-.club_5{
-  .cardClubs(7)
+
+.club_5 {
+  .cardClubs(7);
+  .cardsCount36 & {
+    .cardClubs('J');
+  }
 }
-.club_6{
-  .cardClubs(8)
+
+.club_6 {
+  .cardClubs(8);
+  .cardsCount36 & {
+    .cardClubs('Q');
+  }
 }
-.club_7{
-  .cardClubs(9)
+
+.club_7 {
+  .cardClubs(9);
+  .cardsCount36 & {
+    .cardClubs('K');
+  }
 }
-.club_8{
-  .cardClubs(10)
+
+.club_8 {
+  .cardClubs(10);
+  .cardsCount36 & {
+    .cardClubs('A');
+  }
 }
-.club_9{
+
+.club_9 {
   .cardClubs('J')
 }
-.club_10{
+
+.club_10 {
   .cardClubs('Q')
 }
-.club_11{
+
+.club_11 {
   .cardClubs('K')
 }
-.club_12{
-  .cardClubs('A')
+
+.club_12 {
+  .cardClubs('A');
 }
 
 //diamonds
-.diamond_0{
-  .cardDiamonds(2)
+.diamond_0 {
+  .cardDiamonds(2);
+  .cardsCount36 &{
+    .cardDiamonds(6);
+  }
 }
-.diamond_1{
-  .cardDiamonds(3)
+
+.diamond_1 {
+  .cardDiamonds(3);
+  .cardsCount36 &{
+    .cardDiamonds(7);
+  }
 }
-.diamond_2{
-  .cardDiamonds(4)
+
+.diamond_2 {
+  .cardDiamonds(4);
+  .cardsCount36 &{
+    .cardDiamonds(8);
+  }
 }
-.diamond_3{
-  .cardDiamonds(5)
+
+.diamond_3 {
+  .cardDiamonds(5);
+  .cardsCount36 &{
+    .cardDiamonds(9);
+  }
 }
-.diamond_4{
-  .cardDiamonds(6)
+
+.diamond_4 {
+  .cardDiamonds(6);
+  .cardsCount36 &{
+    .cardDiamonds(10);
+  }
 }
-.diamond_5{
-  .cardDiamonds(7)
+
+.diamond_5 {
+  .cardDiamonds(7);
+  .cardsCount36 &{
+    .cardDiamonds('J');
+  }
 }
-.diamond_6{
-  .cardDiamonds(8)
+
+.diamond_6 {
+  .cardDiamonds(8);
+  .cardsCount36 &{
+    .cardDiamonds('Q');
+  }
 }
-.diamond_7{
-  .cardDiamonds(9)
+
+.diamond_7 {
+  .cardDiamonds(9);
+  .cardsCount36 &{
+    .cardDiamonds('K');
+  }
 }
-.diamond_8{
-  .cardDiamonds(10)
+
+.diamond_8 {
+  .cardDiamonds(10);
+  .cardsCount36 &{
+    .cardDiamonds('A');
+  }
 }
-.diamond_9{
+
+.diamond_9 {
   .cardDiamonds('J')
 }
-.diamond_10{
+
+.diamond_10 {
   .cardDiamonds('Q')
 }
-.diamond_11{
+
+.diamond_11 {
   .cardDiamonds('K')
 }
-.diamond_12{
+
+.diamond_12 {
   .cardDiamonds('A')
 }
 
-
 //hearts
-.heart_0{
-  .cardHearts(2)
+.heart_0 {
+  .cardHearts(2);
+  .cardsCount36 &{
+    .cardHearts(6);
+  }
 }
-.heart_1{
-  .cardHearts(3)
+
+.heart_1 {
+  .cardHearts(3);
+  .cardsCount36 &{
+    .cardHearts(7);
+  }
 }
-.heart_2{
-  .cardHearts(4)
+
+.heart_2 {
+  .cardHearts(4);
+  .cardsCount36 &{
+    .cardHearts(8);
+  }
 }
-.heart_3{
-  .cardHearts(5)
+
+.heart_3 {
+  .cardHearts(5);
+  .cardsCount36 &{
+    .cardHearts(9);
+  }
 }
-.heart_4{
-  .cardHearts(6)
+
+.heart_4 {
+  .cardHearts(6);
+  .cardsCount36 &{
+    .cardHearts(10);
+  }
 }
-.heart_5{
-  .cardHearts(7)
+
+.heart_5 {
+  .cardHearts(7);
+  .cardsCount36 &{
+    .cardHearts('J');
+  }
 }
-.heart_6{
-  .cardHearts(8)
+
+.heart_6 {
+  .cardHearts(8);
+  .cardsCount36 &{
+    .cardHearts('Q');
+  }
 }
-.heart_7{
-  .cardHearts(9)
+
+.heart_7 {
+  .cardHearts(9);
+  .cardsCount36 &{
+    .cardHearts('K');
+  }
 }
-.heart_8{
-  .cardHearts(10)
+
+.heart_8 {
+  .cardHearts(10);
+  .cardsCount36 &{
+    .cardHearts('A');
+  }
 }
-.heart_9{
+
+.heart_9 {
   .cardHearts('J')
 }
-.heart_10{
+
+.heart_10 {
   .cardHearts('Q')
 }
-.heart_11{
+
+.heart_11 {
   .cardHearts('K')
 }
-.heart_12{
+
+.heart_12 {
   .cardHearts('A')
 }
 
-
 //spades
-.spade_0{
-  .cardSpades(2)
+.spade_0 {
+  .cardSpades(2);
+  .cardsCount36 &{
+    .cardSpades(6);
+  }
 }
-.spade_1{
-  .cardSpades(3)
+
+.spade_1 {
+  .cardSpades(3);
+  .cardsCount36 &{
+    .cardSpades(7);
+  }
 }
-.spade_2{
-  .cardSpades(4)
+
+.spade_2 {
+  .cardSpades(4);
+  .cardsCount36 &{
+    .cardSpades(8);
+  }
 }
-.spade_3{
-  .cardSpades(5)
+
+.spade_3 {
+  .cardSpades(5);
+  .cardsCount36 &{
+    .cardSpades(9);
+  }
 }
-.spade_4{
-  .cardSpades(6)
+
+.spade_4 {
+  .cardSpades(6);
+  .cardsCount36 &{
+    .cardSpades(10);
+  }
 }
-.spade_5{
-  .cardSpades(7)
+
+.spade_5 {
+  .cardSpades(7);
+  .cardsCount36 &{
+    .cardSpades('J');
+  }
 }
-.spade_6{
-  .cardSpades(8)
+
+.spade_6 {
+  .cardSpades(8);
+  .cardsCount36 &{
+    .cardSpades('Q');
+  }
 }
-.spade_7{
-  .cardSpades(9)
+
+.spade_7 {
+  .cardSpades(9);
+  .cardsCount36 &{
+    .cardSpades('K');
+  }
 }
-.spade_8{
-  .cardSpades(10)
+
+.spade_8 {
+  .cardSpades(10);
+  .cardsCount36 &{
+    .cardSpades('A');
+  }
 }
-.spade_9{
+
+.spade_9 {
   .cardSpades('J')
 }
-.spade_10{
+
+.spade_10 {
   .cardSpades('Q')
 }
-.spade_11{
+
+.spade_11 {
   .cardSpades('K')
 }
-.spade_12{
+
+.spade_12 {
   .cardSpades('A')
 }
 

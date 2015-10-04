@@ -78,7 +78,8 @@ var Card = React.createClass({
             2: 'heart',
             3: 'spade'
         };
-        return objCards[Math.floor(cardCode / 13)] + "_" + cardCode % 13;
+        var mod = GameStore.getGame().cardsCount == 36 ? 9 : 13;
+        return objCards[Math.floor(cardCode / mod)] + "_" + cardCode % mod;
     },
     render: function () {
         var card = this.props.card;
