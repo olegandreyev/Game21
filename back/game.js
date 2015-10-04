@@ -47,6 +47,9 @@ Game.prototype.userWantsCard = function (id) {
         if(player.points < 21) {
             resolve(card)
         }else{
+            if(player.points == 22 && player.cards.length == 2){
+                player.points--;
+            }
             reject(card)
         }
     })
