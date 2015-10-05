@@ -7,10 +7,17 @@ var Lobby = React.createClass({
       return {room: RoomStore.getRoom()}
     },
     startGame: function () {
-        var thisUserId = localStorage.getItem('id');
         var room = this.state.room;
-        if(thisUserId == room.leader){
-            RoomActions.startGame(room.id);
+        var confirmNotEnoughPlayers = true;
+
+        var thisUserId = localStorage.getItem('id');
+        if(thisUserId == room.leader && confirmNotEnoughPlayers){
+            if(room.players.length !== room.playersMaxCount){
+                confirmNotEnoughPlayers = confirm('В комнате недостаточно игроко, вы уверены что хотите начать игру?');
+            }
+            if(confirmNotEnoughPlayers) {
+                RoomActions.startGame(room.id);
+            }
         }
     },
     componentDidMount : function () {
