@@ -102,15 +102,9 @@ module.exports = function (io) {
             API.createGame(data.id)
                 .then(function (game) {
                     Game = game;
-                    io.to(game.id).emit('startGame', {
-                        id: game.id,
-                        players: game.players,
-                        winners: false,
-                        currentPlayer: game.players[0].id,
-                        cardsCount: game.cardsCount
-                    });
-                    game.initCards();
-                    game.shuffleCards();
+                    emitNewGame(Game)
+                    Game.initCards();
+                    Game.shuffleCards();
                     initStartCards();
                 })
         });
@@ -189,13 +183,7 @@ module.exports = function (io) {
                     } else {
                         Game.newHand().then(function () {
                             return new Promise(function (res, rej) {
-                                io.to(Game.id).emit('startGame', {
-                                    id: Game.id,
-                                    players: Game.players,
-                                    winners: false,
-                                    currentPlayer: Game.players[0].id,
-                                    cardsCount: Game.cardsCount
-                                });
+                                emitNewGame(Game);
                                 res();
                             })
                         }).then(function () {
@@ -203,6 +191,17 @@ module.exports = function (io) {
                         })
                     }
                 })
+        }
+
+        function emitNewGame(game){
+            io.to(game.id).emit('startGame', {
+                id: game.id,
+                players: game.players,
+                winners: false,
+                maxPlayers:game.maxPlayers,
+                currentPlayer: game.players[0].id,
+                cardsCount: game.cardsCount
+            });
         }
 
         function initStartCards() {

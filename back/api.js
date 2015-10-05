@@ -78,7 +78,7 @@ var API = {
                 player.isBot = false;
                 return player;
             });
-            var createdGame = new Game(room.id, room.players, room.cards, room.chat, room.handsCount);
+            var createdGame = new Game(room.id, room.players, room.cards, room.chat, room.handsCount,room.playersMaxCount);
             games.push(createdGame);
             resolve(createdGame);
         })

@@ -3,9 +3,10 @@
  */
     var _ = require('underscore');
 var Promise = require('bluebird');
-var Game = function (id, players, cardsCount, chat, handsCount) {
+var Game = function (id, players, cardsCount, chat, handsCount,maxPlayers) {
     this.id = id;
     this.players = players;
+    this.maxPlayers = maxPlayers;
     this.cards = [];
     this.cardsCount = cardsCount;
     this.chat = chat;

@@ -59,7 +59,7 @@ var CreateRoom = React.createClass({
                             <option value="100500">Безлимит</option>
                         </select>
                     </div>
-                    <button onClick={this.createRoom} className="btn btn-default">Создать комнату</button>
+                    <button onClick={this.createRoom} className="btn btn-primary">Создать комнату</button>
                 </form>
                     </div>
         )

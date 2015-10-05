@@ -431,6 +431,25 @@ body {
   vertical-align: top;
   margin-right: 4px;
 }
+.chat-wrapper .chat-shower {
+  position: fixed;
+  top: 374px;
+  left: 2px;
+}
+.chat-wrapper .chat {
+  position: fixed;
+  top: 410px;
+  left: -400px;
+  width: 400px;
+  padding: 0;
+  transition: left 0.5s ease-out;
+}
+.chat-wrapper .chat.show {
+  left: 0;
+}
+.chat-wrapper .chat .btn {
+  margin-left: -20px;
+}
 .table-game {
   background: url('../resources/table.png') no-repeat center center;
   overflow-x: hidden;
@@ -545,6 +564,8 @@ body {
 }
 .your-turn {
   box-shadow: 0px 0px 127px 5px #ed6894;
+  display: inline-block;
+  vertical-align: top;
 }
 .fly {
   background: url(../resources/shurt.png) no-repeat 0 0;
