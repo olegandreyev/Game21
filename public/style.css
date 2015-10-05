@@ -474,48 +474,48 @@ body {
 }
 .table-game.size2 .spot0 {
   position: absolute;
-  left: 67%;
-  top: 70%;
+  left: 892px;
+  top: 439px;
 }
 .table-game.size2 .spot1 {
   position: absolute;
-  left: 29%;
-  top: 70%;
+  left: 378px;
+  top: 439px;
 }
 .table-game.size3 .spot0 {
   position: absolute;
-  left: 76%;
-  top: 60%;
+  left: 1036px;
+  top: 352px;
 }
 .table-game.size3 .spot1 {
   position: absolute;
-  left: 47%;
-  top: 84%;
+  left: 649px;
+  top: 464px;
 }
 .table-game.size3 .spot2 {
   position: absolute;
-  left: 19%;
-  top: 60%;
+  left: 241px;
+  top: 352px;
 }
 .table-game.size4 .spot0 {
   position: absolute;
-  left: 84%;
-  top: 38%;
+  left: 1100px;
+  top: 214px;
 }
 .table-game.size4 .spot1 {
   position: absolute;
-  left: 69%;
-  top: 74%;
+  left: 876px;
+  top: 439px;
 }
 .table-game.size4 .spot2 {
   position: absolute;
-  left: 25%;
-  top: 74%;
+  left: 424px;
+  top: 439px;
 }
 .table-game.size4 .spot3 {
   position: absolute;
-  left: 11%;
-  top: 38%;
+  left: 166px;
+  top: 214px;
 }
 .create-room-form {
   margin-top: -20px;

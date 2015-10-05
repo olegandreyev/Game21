@@ -80,8 +80,13 @@ socket.on('playerBot', function (data) {
 })
 
 socket.on('closeGame', function () {
-    alert('close game!!!')
+    alert('close game!!!');
+    location.hash = '#/mainPage/userList'
 });
+
+socket.on('leavePlayer', function (data) {
+    GameActions.deletePlayer(data.id)
+})
 
 var App = require('../jsx/App.jsx');
 var MainComponent = require('../jsx/MainComponent.jsx');

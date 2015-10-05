@@ -56,6 +56,12 @@ AppDispatcher.register(function (payload) {
            player = _.findWhere(game.players,{id:id});
             player.isBot = true;
             break;
+        case GameConstants.DELETE_PLAYER:
+            id = payload.data;
+            game.players = game.players.filter(function (player) {
+                return player.id != id;
+            });
+            break;
         default : return true;
     }
     GameStore.emitChange();

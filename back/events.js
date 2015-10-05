@@ -39,23 +39,23 @@ module.exports = function (io) {
         socket.on('disconnect', function () {
             if (player) {
                 player.connected = false;
+                if(Game)
+                Game.removePlayerById(player.id).then(function () {
+                    io.to(Game.id).emit('leavePlayer',{id:player.id});
+                });
                 var room = API.getRoomById(player.roomId);
-                var game = API.getGameById(player.roomId);
-                if (game) {
-                    game.getPlayerById(player.id).isBot = true;
-                    io.to(game.id).emit('playerBot', {id: player.id})
-                }
                 setTimeout(function () {
                     if (!player.connected) {
-                        API.deleteUserById(player.id);
                         if (room) {
                             API.deleteUserFromRoom(room, player);
                             room.leader = room.players[0].id;
                             io.to(room.id).emit('changeRoomState', room)
                         }
+                        API.deleteUserById(player.id);
                     }
                     io.emit('updateOnline', API.getUsers());
                     player = null;
+                    Game = null;
                 }, 10000)
             }
         });
@@ -80,12 +80,12 @@ module.exports = function (io) {
         });
         socket.on('joinRoom', function (joiner) {
             var room = API.getRoomById(joiner.roomId);
-            var player = API.getUserById(joiner.playerId);
             player.roomId = room.id;
             room.players.push(player);
             socket.join(room.id);
             socket.emit('addUserInRoom', room);
-            io.to(room.id).emit('changeRoomState', room)
+            io.to(room.id).emit('changeRoomState', room);
+            io.emit('updateRooms', API.getRooms());
         });
 
         socket.on('exitOfRoom', function (data) {
@@ -102,7 +102,7 @@ module.exports = function (io) {
             API.createGame(data.id)
                 .then(function (game) {
                     Game = game;
-                    emitNewGame(Game)
+                    emitNewGame(Game);
                     Game.initCards();
                     Game.shuffleCards();
                     initStartCards();
@@ -145,6 +145,7 @@ module.exports = function (io) {
 
         socket.on('currPlayerMissed', function (data) {
             var playerWhoTurn = Game.getPlayerById(data.id);
+
             nextTurnOrEnd(playerWhoTurn)
         });
 
@@ -152,6 +153,9 @@ module.exports = function (io) {
             var thisPlayer = _.findIndex(Game.players, function (player) {
                 return player.id == playerWhoTurn.id;
             });
+
+            console.log(API.getGames());
+            //bug here
             if (thisPlayer < Game.players.length - 1) {
                 io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
             } else {
@@ -180,6 +184,8 @@ module.exports = function (io) {
                 }).then(function () {
                     if (Game.handsCount == Game.currentHand) {
                         io.to(Game.id).emit('closeGame');
+                        API.deleteGame(Game.id);
+                        Game = null;
                     } else {
                         Game.newHand().then(function () {
                             return new Promise(function (res, rej) {

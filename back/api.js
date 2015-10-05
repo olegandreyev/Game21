@@ -85,6 +85,14 @@ var API = {
     },
     getGameById : function (id) {
         return _.findWhere(games,{id:id})
+    },
+    deleteGame: function (id) {
+        games = games.filter(function (game) {
+            return game.id != id;
+        })
+    },
+    getGames : function () {
+        return games;
     }
 };
 

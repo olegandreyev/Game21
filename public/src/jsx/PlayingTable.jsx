@@ -45,7 +45,7 @@ var PlayingTable = React.createClass({
                 location.hash = '#/mainPage/userList'
             }
         }
-
+        game.players = game.players? game.players : [];
         var players = game.players.map(function (player, i) {
             return <Player currentPlayer={currentPlayer} player={player} pos={i}/>
         });

@@ -10,7 +10,8 @@ var GameConstants = keyMirror({
     UPDATE_CARDS:null,
     SET_CURRENT_PLAYER:null,
     SET_WINNERS:null,
-    SET_BOT:null
+    SET_BOT:null,
+    DELETE_PLAYER:null
 });
 
 module.exports = GameConstants;

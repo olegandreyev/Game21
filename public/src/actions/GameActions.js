@@ -43,6 +43,12 @@ var GameActions = {
             action:GameConstants.SET_WINNERS,
             data:data
         })
+    },
+    deletePlayer: function (id) {
+        AppDispatcher.dispatch({
+            action:GameConstants.DELETE_PLAYER,
+            data:id
+        })
     }
 };
 

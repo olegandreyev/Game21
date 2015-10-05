@@ -60,6 +60,16 @@ Game.prototype.userWantsCard = function (id) {
 
 };
 
+Game.prototype.removePlayerById = function (id) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        self.players = _.filter(self.players, function (player) {
+            return  player.id != id;
+        })
+        resolve();
+    })
+
+};
 Game.prototype.getPoints = function (card) {
     if(this.cardsCount === 36){
         card = card % 9;
