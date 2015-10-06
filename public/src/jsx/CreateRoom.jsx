@@ -41,8 +41,8 @@ var CreateRoom = React.createClass({
                     <div className="form-group">
                         <label htmlFor="cardsCnt">Колода карт: </label>
                         <select value={this.state.cards} onChange={this.handleSelect} className='form-control' id="cardsCnt">
-                            <option default value="36">36</option>
-                            <option value="54">54</option>
+                            <option default value="36">36 (Очко)</option>
+                            <option value="54">54 (Black Jack)</option>
                         </select>
                         <label htmlFor="playersCnt">Количество игроков: </label>
                         <select value={this.state.playersCount} onChange={this.handleSelect2} className='form-control' id="playersCnt">

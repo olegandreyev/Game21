@@ -46,12 +46,12 @@ Game.prototype.userWantsCard = function (id) {
     return new Promise(function (resolve, reject) {
         var player = _.findWhere(self.players,{id:id});
         var card = self.getCard();
-        player.points += self.getPoints(card);
+        player.points += self.getPoints(card, player.points);
         player.cards.push(card);
         if(player.points < 21) {
             resolve(card)
         }else{
-            if(player.points == 22 && player.cards.length == 2){
+            if(player.points == 22 && player.cards.length == 2 && self.cardsCount == 36){
                 player.points--;
             }
             reject(card)
@@ -70,13 +70,17 @@ Game.prototype.removePlayerById = function (id) {
     })
 
 };
-Game.prototype.getPoints = function (card) {
+Game.prototype.getPoints = function (card, points) {
     if(this.cardsCount === 36){
         card = card % 9;
         return this.points36[card];
     }else {
         card = card % 13;
-        return this.points54[card];
+        var cardPoint =  this.points54[card];
+        if(cardPoint == 11 && points + cardPoint > 21){
+            cardPoint = 1;
+        }
+        return cardPoint
     }
 };
 
@@ -84,7 +88,7 @@ Game.prototype.points36 = {
     0:6, 1:7, 2:8, 3:9, 4:10, 5:2, 6:3, 7:4, 8:11
 };
 Game.prototype.points54 = {
-    0:2,1:3,2:4,3:5,4:6,5:7,6:8,7:9,8:10,9:2,10:3,11:4,12:11
+    0:2,1:3,2:4,3:5,4:6,5:7,6:8,7:9,8:10,9:10,10:10,11:10,12:11
 };
 
 Game.prototype.setWinner = function () {

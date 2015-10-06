@@ -31,6 +31,7 @@ var Lobby = React.createClass({
     },
     render : function () {
         var room = this.state.room;
+        var titleGame = room.cards == 36 ?"Очко":"Black Jack";
         var thisUserId = localStorage.getItem('id');
         if(room.players) {
             var players = room.players.map(function (player,i) {
@@ -45,7 +46,10 @@ var Lobby = React.createClass({
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <a className="navbar-brand">
-                                Добро пожаловать в комнату <span className='room-title'>"{room.title}"</span>
+                                Добро пожаловать в комнату
+                                <span className='room-title'>"{room.title}"  </span>
+                                Раздачи: <span className='room-title'> {room.handsCount}</span>
+                                Игра:<span className='room-title'>{titleGame}</span>
                                 </a>
                             </div>
                         </div>
@@ -53,7 +57,7 @@ var Lobby = React.createClass({
                 <p className="navbar-text navbar-right">Чатик комнаты<span className='glyphicon glyphicon-comment'></span></p>
                 <div className="row">
                     <div className="col-md-6 col-lg-6 col-sm-6">
-                        <p>Игроки 3/4</p>
+                        <p>Игроки {room.players.length}/{room.playersMaxCount}</p>
                         <ul className="list-group users-lobby">
                             {players}
                         </ul>

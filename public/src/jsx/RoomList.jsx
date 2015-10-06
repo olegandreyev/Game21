@@ -26,9 +26,10 @@ var RoomList = React.createClass({
         var self = this;
         var roomList = this.state.rooms.map(function (room, index) {
             var cls = index === self.state.selectedRoom? 'active':''
+            var titleGame = room.cards == 36 ? "(Очко)" : "(Black Jack)";
           return <tr onClick={self.joinRoom.bind(self, room)} key={room.id} className={cls}>
               <td>{room.title}</td>
-              <td>{room.cards}</td>
+              <td>{room.cards+"  "+titleGame}</td>
               <td>{room.handsCount}</td>
               <td>{room.players.length}/{room.playersMaxCount}</td>
           </tr>

@@ -359,8 +359,11 @@ body {
 }
 .actions {
   position: absolute;
-  left: 580px;
-  top: 286px;
+  left: 0;
+  top: 40%;
+  right: 0;
+  padding-left: 29px;
+  text-align: center;
 }
 .actions.no-click {
   pointer-events: none;
@@ -414,6 +417,7 @@ body {
 }
 .room-title {
   color: white;
+  padding: 0 10px;
 }
 .leader {
   background: url(../resources/Crown_Icon.png) no-repeat center center;
