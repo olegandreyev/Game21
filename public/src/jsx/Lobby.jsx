@@ -44,6 +44,8 @@ var Lobby = React.createClass({
                 return <li key={i} className={"list-group-item"}>{player.nick} {isLeader ?
                     <div className='leader'></div> : ''}</li>
             });
+            var playersCountNow = room.players.length,
+                playersMaxCount = room.playersMaxCount;
         }
         return (
             <div className="container-fluid">
@@ -63,7 +65,7 @@ var Lobby = React.createClass({
                 <p className="navbar-text navbar-right">Чатик комнаты<span className='glyphicon glyphicon-comment'></span></p>
                 <div className="row">
                     <div className="col-md-6 col-lg-6 col-sm-6">
-                        <p>Игроки {room.players.length}/{room.playersMaxCount}</p>
+                        <p>Игроки {playersCountNow}/{playersMaxCount}</p>
                         <ul className="list-group users-lobby">
                             {players}
                         </ul>
