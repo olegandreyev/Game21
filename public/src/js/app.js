@@ -80,8 +80,7 @@ socket.on('playerBot', function (data) {
 })
 
 socket.on('closeGame', function () {
-    alert('close game!!!');
-    location.hash = '#/mainPage/userList'
+    $('#myModal').modal('show');
     //location.reload();
 });
 

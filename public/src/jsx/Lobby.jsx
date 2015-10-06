@@ -2,20 +2,25 @@
 var RoomStore = require('../stores/RoomStore');
 var RoomActions = require('../actions/RoomActions');
 var Chat = require('./Chat.jsx');
+var AskToStartPopup = require('./Popups.jsx').AskToStartPopup;
 var Lobby = React.createClass({
     getInitialState: function () {
       return {room: RoomStore.getRoom()}
     },
+    confirmToStart: function (yes) {
+        if(yes){
+            RoomActions.startGame(this.state.room.id);
+        }
+        $('#answerPopup1').modal('hide');
+    },
     startGame: function () {
         var room = this.state.room;
-        var confirmNotEnoughPlayers = true;
 
         var thisUserId = localStorage.getItem('id');
-        if(thisUserId == room.leader && confirmNotEnoughPlayers){
+        if(thisUserId == room.leader){
             if(room.players.length !== room.playersMaxCount){
-                confirmNotEnoughPlayers = confirm('В комнате недостаточно игроко, вы уверены что хотите начать игру?');
-            }
-            if(confirmNotEnoughPlayers) {
+                $('#answerPopup1').modal('show');
+            }else{
                 RoomActions.startGame(room.id);
             }
         }
@@ -42,6 +47,7 @@ var Lobby = React.createClass({
         }
         return (
             <div className="container-fluid">
+                <AskToStartPopup cb={this.confirmToStart} />
                 <nav className="navbar navbar-inverse">
                     <div className="container-fluid">
                         <div className="navbar-header">

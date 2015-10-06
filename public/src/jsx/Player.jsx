@@ -7,7 +7,6 @@ var Player = React.createClass({
     componentDidMount : function () {
         var self = this;
         GameStore.addChangeListener(function () {
-            console.log(GameStore.getGame(),'game view');
             if(GameStore.getGame().cards){
                 self.setState({showCards:''})
             }else{
