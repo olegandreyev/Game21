@@ -72,7 +72,7 @@ var API = {
         return new Promise(function (resolve, reject) {
             var room = self.getRoomById(id);
             self.deleteRoomById(id);
-            room.players = room.players.map(function (player) {
+            room.players = room.players.map(function (player,i) {
                 player.points = 0;
                 player.cards = [];
                 player.isBot = false;

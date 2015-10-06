@@ -83,6 +83,7 @@ module.exports = function (io) {
             player.roomId = room.id;
             room.players.push(player);
             socket.join(room.id);
+
             socket.emit('addUserInRoom', room);
             io.to(room.id).emit('changeRoomState', room);
             io.emit('updateRooms', API.getRooms());
@@ -93,7 +94,9 @@ module.exports = function (io) {
             var player = API.getUserById(data.userId);
             socket.leave(room.id);
             API.deleteUserFromRoom(room, player);
+
             io.to(room.id).emit('changeRoomState', room)
+            io.emit('updateRooms', API.getRooms());
         });
 
 
@@ -102,9 +105,16 @@ module.exports = function (io) {
             API.createGame(data.id)
                 .then(function (game) {
                     Game = game;
-                    emitNewGame(Game);
                     Game.initCards();
                     Game.shuffleCards();
+                    io.to(game.id).emit('startGame', {
+                        id: game.id,
+                        players: game.players,
+                        winners: false,
+                        maxPlayers:game.maxPlayers,
+                        currentPlayer: game.players[0].id,
+                        cardsCount: game.cardsCount
+                    });
                     initStartCards();
                 })
         });
@@ -145,7 +155,6 @@ module.exports = function (io) {
 
         socket.on('currPlayerMissed', function (data) {
             var playerWhoTurn = Game.getPlayerById(data.id);
-
             nextTurnOrEnd(playerWhoTurn)
         });
 
@@ -154,10 +163,9 @@ module.exports = function (io) {
                 return player.id == playerWhoTurn.id;
             });
 
-            console.log(API.getGames());
-            //bug here
             if (thisPlayer < Game.players.length - 1) {
                 io.to(Game.id).emit('setCurrentPlayer', {userId: Game.players[++thisPlayer].id})
+                Game=null;
             } else {
                 setTimeout(function () {
                     endGame();
@@ -169,7 +177,7 @@ module.exports = function (io) {
             Game.setWinner()
                 .then(function (winners) {
                     return new Promise(function (res, rej) {
-                        io.to(Game.id).emit('setWinners', {winners: winners, game: Game})
+                        io.to(Game.id).emit('setWinners', {winners: winners, game: Game});
                         setTimeout(function () {
                             res();
                         }, 8000)
@@ -189,7 +197,14 @@ module.exports = function (io) {
                     } else {
                         Game.newHand().then(function () {
                             return new Promise(function (res, rej) {
-                                emitNewGame(Game);
+                                io.to(Game.id).emit('startGame', {
+                                    id: Game.id,
+                                    players: Game.players,
+                                    winners: false,
+                                    maxPlayers:Game.maxPlayers,
+                                    currentPlayer: Game.players[0].id,
+                                    cardsCount: Game.cardsCount
+                                });
                                 res();
                             })
                         }).then(function () {
@@ -197,17 +212,6 @@ module.exports = function (io) {
                         })
                     }
                 })
-        }
-
-        function emitNewGame(game){
-            io.to(game.id).emit('startGame', {
-                id: game.id,
-                players: game.players,
-                winners: false,
-                maxPlayers:game.maxPlayers,
-                currentPlayer: game.players[0].id,
-                cardsCount: game.cardsCount
-            });
         }
 
         function initStartCards() {

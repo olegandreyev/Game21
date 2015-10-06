@@ -82,6 +82,7 @@ socket.on('playerBot', function (data) {
 socket.on('closeGame', function () {
     alert('close game!!!');
     location.hash = '#/mainPage/userList'
+    //location.reload();
 });
 
 socket.on('leavePlayer', function (data) {
