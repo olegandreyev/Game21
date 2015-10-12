@@ -36,7 +36,7 @@ var CreateRoom = React.createClass({
                         <input onChange={this.handleTitle}
                                value={this.state.title}
                                type="text" className="form-control" id="title"
-                               placeholder="Название комнаты"/>
+                               placeholder="Название комнаты" required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="cardsCnt">Колода карт: </label>
