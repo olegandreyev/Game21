@@ -39,10 +39,13 @@ module.exports = function (io) {
         socket.on('disconnect', function () {
             if (player) {
                 player.connected = false;
-                if(Game)
-                Game.removePlayerById(player.id).then(function () {
-                    io.to(Game.id).emit('leavePlayer',{id:player.id});
-                });
+                Game = API.getGameById(player.roomId);
+                if(Game) {
+                    Game.removePlayerById(player.id).then(function () {
+                        io.to(Game.id).emit('leavePlayer', {id: player.id});
+                    });
+                }
+
                 var room = API.getRoomById(player.roomId);
                 setTimeout(function () {
                     if (!player.connected) {
@@ -91,12 +94,14 @@ module.exports = function (io) {
 
         socket.on('exitOfRoom', function (data) {
             var room = API.getRoomById(data.roomId);
-            var player = API.getUserById(data.userId);
-            socket.leave(room.id);
-            API.deleteUserFromRoom(room, player);
+            if(room) {
+                var player = API.getUserById(data.userId);
+                socket.leave(room.id);
+                API.deleteUserFromRoom(room, player);
 
-            io.to(room.id).emit('changeRoomState', room)
-            io.emit('updateRooms', API.getRooms());
+                io.to(room.id).emit('changeRoomState', room)
+                io.emit('updateRooms', API.getRooms());
+            }
         });
 
 
@@ -117,6 +122,7 @@ module.exports = function (io) {
                     });
                     initStartCards();
                 })
+            io.emit('updateRooms', API.getRooms());
         });
 
         socket.on('someoneAddCard', function (data) {
@@ -233,6 +239,7 @@ module.exports = function (io) {
                         }
                     });
                     var points = playerWhoTurn.id == player.id ? playerWhoTurn.points : -1;
+                    if(player.connected)
                     io.sockets.connected[player.socketId].emit('updateUsersCards', {
                         id: playerWhoTurn.id,
                         points: points,
