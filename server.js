@@ -10,7 +10,7 @@ var server = http.createServer(app)
 app.use(express.static('public'));
 
 
-io = io.listen(server.listen(process.env.port));
+io = io.listen(server.listen(process.env.PORT || 3000));
 
 require('./back/events')(io);
 
